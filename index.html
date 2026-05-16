@@ -172,294 +172,1475 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
   </div>
 </div>
 <script>
-const BASE_ROSCOS=[
-// ROSCO 0
+const BASE_ROSCOS = [
+//── ROSCO 0 ─────────────────────────────────────────────
 [{p:"Río más largo de América del Sur",r:"AMAZONAS",t:"e"},
-{p:"Mamífero marino más grande del planeta",r:"BALLENA",t:"e"},
-{p:"Felino más veloz del planeta, de manchas negras",r:"CHITA",t:"e"},
-{p:"Mes del año en que se celebra la Navidad",r:"DICIEMBRE",t:"e"},
-{p:"País cuya capital es Quito, en América del Sur",r:"ECUADOR",t:"e"},
-{p:"Baile español con taconeo, castañuelas y trajes de lunares",r:"FLAMENCO",t:"e"},
-{p:"Instrumento de cuerdas pulsadas típico de España",r:"GUITARRA",t:"e"},
-{p:"Órgano del cuerpo humano que filtra toxinas y produce bilis",r:"HIGADO",t:"e"},
-{p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
-{p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
-{p:"Arte marcial japonés olímpico con cinturones de colores",r:"KARATE",t:"e"},
-{p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
-{p:"Compositor austriaco de La Flauta Mágica y el Réquiem",r:"MOZART",t:"e"},
-{p:"País escandinavo con capital Oslo y famosos fiordos",r:"NORUEGA",t:"e"},
-{p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
-{p:"Ave blanca símbolo universal de la paz",r:"PALOMA",t:"e"},
-{p:"Lácteo sólido elaborado con leche cuajada y prensada",r:"QUESO",t:"e"},
-{p:"Color primario asociado al fuego y la sangre",r:"ROJO",t:"e"},
-{p:"Estrella central de nuestro sistema planetario",r:"SOL",t:"e"},
-{p:"Felino rayado de Asia, el más grande del mundo",r:"TIGRE",t:"e"},
-{p:"Instrumento de cuatro cuerdas originario de Hawái",r:"UKELELE",t:"e"},
-{p:"País de América del Sur cuya capital es Caracas",r:"VENEZUELA",t:"e"},
-{p:"Red mundial de información e internet",r:"WEB",t:"e"},
-{p:"Instrumento de percusión de láminas golpeadas con mazos",r:"XILOFONO",t:"e"},
-{p:"Disciplina de meditación y posturas corporales de la India",r:"YOGA",t:"e"},
-{p:"Mamífero cánido de pelaje rojizo y cola esponjosa",r:"ZORRO",t:"e"}
-],
-// ROSCO 1
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País escandinavo con capital Oslo y fiordos",r:"NORUEGA",t:"e"},
+ {p:"Ave sudamericana similar al avestruz que no puede volar",r:"ÑANDÚ",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 1 ─────────────────────────────────────────────
 [{p:"País de América del Sur cuya capital es Buenos Aires",r:"ARGENTINA",t:"e"},
-{p:"Capital de Alemania, ciudad del muro caído en 1989",r:"BERLIN",t:"e"},
-{p:"País cuya capital es Santiago, de forma muy alargada",r:"CHILE",t:"e"},
-{p:"Capital de Dinamarca, ciudad de La Sirenita",r:"DINAMARCA",t:"e"},
-{p:"Famoso inventor norteamericano del fonógrafo y la bombilla",r:"EDISON",t:"e"},
-{p:"País nórdico con capital Helsinki y miles de lagos",r:"FINLANDIA",t:"e"},
-{p:"Flor amarilla de pétalos largos que gira siguiendo al sol",r:"GIRASOL",t:"e"},
-{p:"Deporte de equipo sobre hielo con palos y disco",r:"HOCKEY",t:"e"},
-{p:"Primer cosmonauta en orbitar la Tierra en 1961",r:"GAGARIN",t:"c"},
-{p:"Especie de ballena gigante que salta fuera del agua",r:"JOROBADA",t:"e"},
-{p:"Arte marcial coreano olímpico con énfasis en patadas altas",r:"TAEKWONDO",t:"c"},
-{p:"Capital de Alemania, ciudad del muro caído en 1989",r:"BERLIN",t:"c"},
-{p:"Compositor austriaco del siglo XVIII autor del Réquiem",r:"MOZART",t:"e"},
-{p:"País escandinavo con capital Oslo",r:"NORUEGA",t:"e"},
-{p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
-{p:"Pintor malagueño co-fundador del Cubismo",r:"PICASSO",t:"e"},
-{p:"Capital de Ecuador a 2800 metros de altitud",r:"QUITO",t:"e"},
-{p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
-{p:"Estrella central del sistema solar",r:"SOL",t:"e"},
-{p:"Instrumento de viento de metal muy usado en jazz",r:"TROMPETA",t:"e"},
-{p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
-{p:"Capital de Austria, ciudad de Mozart y Beethoven",r:"VIENA",t:"e"},
-{p:"Deporte de invierno practicado sobre nieve con tabla",r:"SNOWBOARD",t:"c"},
-{p:"Instrumento de percusión de láminas de madera o metal",r:"XILOFONO",t:"e"},
-{p:"Disciplina de meditación y posturas de la India",r:"YOGA",t:"e"},
-{p:"Mamífero cánido de pelaje rojizo y cola esponjosa",r:"ZORRO",t:"e"}
-],
-// ROSCO 2
-[{p:"Ave rapaz de gran envergadura símbolo de muchos países",r:"AGUILA",t:"e"},
-{p:"País sudamericano donde se habla portugués, el más grande",r:"BRASIL",t:"e"},
-{p:"País cuya capital es Bogotá, exporta café de calidad",r:"COLOMBIA",t:"e"},
-{p:"Mes del año en que se celebra la Navidad",r:"DICIEMBRE",t:"e"},
-{p:"Famoso físico alemán autor de la teoría de la relatividad",r:"EINSTEIN",t:"e"},
-{p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
-{p:"Instrumento de cuerdas pulsadas típico de España",r:"GUITARRA",t:"e"},
-{p:"Órgano que filtra toxinas y produce bilis en el cuerpo",r:"HIGADO",t:"e"},
-{p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
-{p:"Especie de ballena que emite cantos complejos",r:"JOROBADA",t:"e"},
-{p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
-{p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
-{p:"Compositor austriaco de La Flauta Mágica",r:"MOZART",t:"e"},
-{p:"País escandinavo con capital Oslo",r:"NORUEGA",t:"e"},
-{p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
-{p:"Ave blanca símbolo de la paz",r:"PALOMA",t:"e"},
-{p:"Capital de Ecuador",r:"QUITO",t:"e"},
-{p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
-{p:"Estrella central de nuestro sistema planetario",r:"SOL",t:"e"},
-{p:"Instrumento de viento de metal del jazz y las bandas",r:"TROMPETA",t:"e"},
-{p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
-{p:"Capital de Austria, ciudad de Mozart y Beethoven",r:"VIENA",t:"e"},
-{p:"Red mundial de páginas e información de internet",r:"WEB",t:"e"},
-{p:"Instrumento de percusión de láminas golpeadas con mazos",r:"XILOFONO",t:"e"},
-{p:"Disciplina de meditación y posturas corporales",r:"YOGA",t:"e"},
-{p:"Mamífero cánido de pelaje rojizo y cola grande",r:"ZORRO",t:"e"}
-],
-// ROSCO 3
-[{p:"País de América del Sur cuya capital es Buenos Aires",r:"ARGENTINA",t:"e"},
-{p:"Género musical caribeño de ritmo tropical muy bailable",r:"CUMBIA",t:"c"},
-{p:"País cuya capital es Bogotá, exporta café mundialmente",r:"COLOMBIA",t:"e"},
-{p:"Mes del año en que se celebra la Navidad",r:"DICIEMBRE",t:"e"},
-{p:"Famoso físico alemán que formuló E=mc²",r:"EINSTEIN",t:"e"},
-{p:"Baile español con castañuelas, taconeo y trajes de lunares",r:"FLAMENCO",t:"e"},
-{p:"Flor amarilla de largo tallo que gira hacia el sol",r:"GIRASOL",t:"e"},
-{p:"Deporte sobre hielo con palos y disco",r:"HOCKEY",t:"e"},
-{p:"Elemento químico de símbolo Fe, base de la construcción",r:"HIERRO",t:"c"},
-{p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
-{p:"Arte marcial japonés olímpico",r:"KARATE",t:"e"},
-{p:"Satélite natural de la Tierra",r:"LUNA",t:"e"},
-{p:"Compositor austriaco del siglo XVIII",r:"MOZART",t:"e"},
-{p:"País escandinavo con capital Oslo y fiordos",r:"NORUEGA",t:"e"},
-{p:"Instrumento de viento de madera",r:"OBOE",t:"e"},
-{p:"Pintor malagueño co-fundador del Cubismo",r:"PICASSO",t:"e"},
-{p:"Capital de Ecuador",r:"QUITO",t:"e"},
-{p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
-{p:"Estrella central del sistema solar",r:"SOL",t:"e"},
-{p:"Instrumento de viento de metal del jazz",r:"TROMPETA",t:"e"},
-{p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
-{p:"Capital de Austria",r:"VIENA",t:"e"},
-{p:"Red mundial de información",r:"WEB",t:"e"},
-{p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
-{p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"},
-{p:"Mamífero cánido de pelaje rojizo",r:"ZORRO",t:"e"}
-],
-// ROSCO 4
-[{p:"Primera letra del alfabeto griego",r:"ALFA",t:"e"},
-{p:"País sudamericano donde se habla portugués",r:"BRASIL",t:"e"},
-{p:"País de América del Sur con capital Santiago, forma alargada",r:"CHILE",t:"e"},
-{p:"Capital de Dinamarca, ciudad de La Sirenita",r:"DINAMARCA",t:"e"},
-{p:"Inventor norteamericano del fonógrafo y la bombilla",r:"EDISON",t:"e"},
-{p:"Instrumento de viento de madera más agudo de la orquesta",r:"FLAUTA",t:"e"},
-{p:"Instrumento de cuerdas pulsadas de España y Latinoamérica",r:"GUITARRA",t:"e"},
-{p:"Desierto más extenso del mundo, en el norte de África",r:"SAHARA",t:"c"},
-{p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
-{p:"Deporte de combate de origen japonés con proyecciones y sumisiones",r:"JUDO",t:"e"},
-{p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
-{p:"Satélite natural de la Tierra",r:"LUNA",t:"e"},
-{p:"Compositor austriaco de La Flauta Mágica",r:"MOZART",t:"e"},
-{p:"País escandinavo con capital Oslo",r:"NORUEGA",t:"e"},
-{p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
-{p:"Ave blanca símbolo de la paz",r:"PALOMA",t:"e"},
-{p:"Capital de Ecuador",r:"QUITO",t:"e"},
-{p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
-{p:"Estrella central del sistema solar",r:"SOL",t:"e"},
-{p:"Instrumento de viento de metal del jazz",r:"TROMPETA",t:"e"},
-{p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
-{p:"Capital de Austria",r:"VIENA",t:"e"},
-{p:"Red mundial de información",r:"WEB",t:"e"},
-{p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
-{p:"Disciplina de meditación y posturas de la India",r:"YOGA",t:"e"},
-{p:"Mamífero cánido de pelaje rojizo y cola esponjosa",r:"ZORRO",t:"e"}
-],
-// ROSCO 5
-[{p:"Capital de Francia, ciudad del Louvre y la Torre Eiffel",r:"PARIS",t:"c"},
-{p:"Capital de Alemania famosa por su muro caído en 1989",r:"BERLIN",t:"e"},
-{p:"País cuya capital es Bogotá, exporta café",r:"COLOMBIA",t:"e"},
-{p:"Mes del año en que se celebra la Navidad",r:"DICIEMBRE",t:"e"},
-{p:"País del norte de África con pirámides y el río Nilo",r:"EGIPTO",t:"e"},
-{p:"País nórdico con capital Helsinki y miles de lagos",r:"FINLANDIA",t:"e"},
-{p:"Flor amarilla de largo tallo que gira siguiendo al sol",r:"GIRASOL",t:"e"},
-{p:"Deporte de equipo sobre hielo con palos y disco",r:"HOCKEY",t:"e"},
-{p:"Elemento químico de símbolo Fe, el más usado en la industria",r:"HIERRO",t:"c"},
-{p:"Especie de ballena que salta y migra miles de kilómetros",r:"JOROBADA",t:"e"},
-{p:"Arte marcial japonés olímpico con cinturones",r:"KARATE",t:"e"},
-{p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
-{p:"Compositor austriaco del siglo XVIII de La Flauta Mágica",r:"MOZART",t:"e"},
-{p:"País escandinavo con capital Oslo",r:"NORUEGA",t:"e"},
-{p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
-{p:"Pintor malagueño co-fundador del Cubismo",r:"PICASSO",t:"e"},
-{p:"Capital de Ecuador a 2800 metros de altitud",r:"QUITO",t:"e"},
-{p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
-{p:"Estrella central de nuestro sistema solar",r:"SOL",t:"e"},
-{p:"Instrumento de viento de metal del jazz",r:"TROMPETA",t:"e"},
-{p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
-{p:"Capital de Austria ciudad de Mozart y Beethoven",r:"VIENA",t:"e"},
-{p:"Red de páginas e información de internet",r:"WEB",t:"e"},
-{p:"Instrumento de percusión de láminas con mazos",r:"XILOFONO",t:"e"},
-{p:"Disciplina de meditación y posturas corporales",r:"YOGA",t:"e"},
-{p:"Mamífero cánido de pelaje rojizo y cola esponjosa",r:"ZORRO",t:"e"}
-],
-// ROSCO 6
-[{p:"Ave rapaz símbolo de muchos países, de gran envergadura",r:"AGUILA",t:"e"},
-{p:"Mamífero marino que puede medir hasta 30 metros de longitud",r:"BALLENA",t:"e"},
-{p:"País cuya capital es Santiago de Chile",r:"CHILE",t:"e"},
-{p:"Capital de Irlanda, ciudad de la cerveza Guinness",r:"DUBLIN",t:"e"},
-{p:"Famoso físico alemán que formuló la teoría de la relatividad",r:"EINSTEIN",t:"e"},
-{p:"Baile español con castañuelas taconeo y trajes de lunares",r:"FLAMENCO",t:"e"},
-{p:"Ave que imita la voz humana de plumaje llamativo",r:"GUACAMAYO",t:"e"},
-{p:"Desierto más extenso del planeta, en el norte de África",r:"SAHARA",t:"c"},
-{p:"País europeo con forma de bota",r:"ITALIA",t:"e"},
-{p:"Especie de ballena que salta fuera del agua",r:"JOROBADA",t:"e"},
-{p:"Arte marcial japonés con cinturones",r:"KARATE",t:"e"},
-{p:"Satélite natural de la Tierra",r:"LUNA",t:"e"},
-{p:"Compositor austriaco del Réquiem y La Flauta Mágica",r:"MOZART",t:"e"},
-{p:"País escandinavo con capital Oslo",r:"NORUEGA",t:"e"},
-{p:"Instrumento de viento de madera",r:"OBOE",t:"e"},
-{p:"Ave blanca símbolo de la paz",r:"PALOMA",t:"e"},
-{p:"Capital de Ecuador",r:"QUITO",t:"e"},
-{p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
-{p:"Estrella central del sistema solar",r:"SOL",t:"e"},
-{p:"Instrumento de viento de metal del jazz",r:"TROMPETA",t:"e"},
-{p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
-{p:"Capital de Austria",r:"VIENA",t:"e"},
-{p:"Red de páginas e información de internet",r:"WEB",t:"e"},
-{p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
-{p:"Disciplina de meditación y posturas hindú",r:"YOGA",t:"e"},
-{p:"Mamífero cánido de pelaje rojizo",r:"ZORRO",t:"e"}
-],
-// ROSCO 7
-[{p:"País de América del Sur cuya capital es Buenos Aires",r:"ARGENTINA",t:"e"},
-{p:"País sudamericano donde se habla portugués",r:"BRASIL",t:"e"},
-{p:"País cuya capital es Bogotá",r:"COLOMBIA",t:"e"},
-{p:"Mes del año en que se celebra la Navidad",r:"DICIEMBRE",t:"e"},
-{p:"Famoso físico alemán que formuló la relatividad",r:"EINSTEIN",t:"e"},
-{p:"Baile español con castañuelas y taconeo",r:"FLAMENCO",t:"e"},
-{p:"Flor amarilla que gira hacia el sol",r:"GIRASOL",t:"e"},
-{p:"Deporte sobre hielo con palos y disco",r:"HOCKEY",t:"e"},
-{p:"Elemento de símbolo Fe, base de la construcción metálica",r:"HIERRO",t:"c"},
-{p:"Especie de ballena gigante que salta y canta",r:"JOROBADA",t:"e"},
-{p:"Arte marcial japonés olímpico",r:"KARATE",t:"e"},
-{p:"Satélite natural de la Tierra",r:"LUNA",t:"e"},
-{p:"Compositor austriaco del siglo XVIII",r:"MOZART",t:"e"},
-{p:"País escandinavo con capital Oslo",r:"NORUEGA",t:"e"},
-{p:"Instrumento de viento de madera",r:"OBOE",t:"e"},
-{p:"Pintor malagueño del Cubismo",r:"PICASSO",t:"e"},
-{p:"Capital de Ecuador",r:"QUITO",t:"e"},
-{p:"País europeo con capital Bucarest",r:"RUMANIA",t:"e"},
-{p:"Estrella del sistema solar",r:"SOL",t:"e"},
-{p:"Instrumento de metal del jazz",r:"TROMPETA",t:"e"},
-{p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
-{p:"Capital de Austria",r:"VIENA",t:"e"},
-{p:"Red mundial de información",r:"WEB",t:"e"},
-{p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
-{p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"},
-{p:"Animal cánido de pelaje rojizo",r:"ZORRO",t:"e"}
-],
-// ROSCO 8
-[{p:"Ave rapaz de gran tamaño símbolo de muchos países",r:"AGUILA",t:"e"},
-{p:"País sudamericano donde se habla portugués",r:"BRASIL",t:"e"},
-{p:"País cuya capital es Santiago",r:"CHILE",t:"e"},
-{p:"Mes del año en que se celebra la Navidad",r:"DICIEMBRE",t:"e"},
-{p:"Inventor del fonógrafo y la bombilla eléctrica",r:"EDISON",t:"e"},
-{p:"Baile español con taconeo y castañuelas",r:"FLAMENCO",t:"e"},
-{p:"Ave que imita la voz humana, de plumaje llamativo",r:"GUACAMAYO",t:"e"},
-{p:"Desierto más extenso del planeta en el norte de África",r:"SAHARA",t:"c"},
-{p:"País europeo con forma de bota",r:"ITALIA",t:"e"},
-{p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
-{p:"Arte marcial japonés con cinturones",r:"KARATE",t:"e"},
-{p:"Satélite natural de la Tierra",r:"LUNA",t:"e"},
-{p:"Compositor austriaco del Réquiem y La Flauta Mágica",r:"MOZART",t:"e"},
-{p:"País escandinavo con capital Oslo",r:"NORUEGA",t:"e"},
-{p:"Instrumento de viento de madera",r:"OBOE",t:"e"},
-{p:"Ave blanca símbolo de la paz",r:"PALOMA",t:"e"},
-{p:"Capital de Ecuador",r:"QUITO",t:"e"},
-{p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
-{p:"Estrella central del sistema solar",r:"SOL",t:"e"},
-{p:"Instrumento de viento de metal del jazz",r:"TROMPETA",t:"e"},
-{p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
-{p:"Capital de Austria",r:"VIENA",t:"e"},
-{p:"Red de páginas e información de internet",r:"WEB",t:"e"},
-{p:"Instrumento de percusión de láminas con mazos",r:"XILOFONO",t:"e"},
-{p:"Disciplina de meditación y posturas hindú",r:"YOGA",t:"e"},
-{p:"Mamífero cánido de pelaje rojizo y cola esponjosa",r:"ZORRO",t:"e"}
-],
-// ROSCO 9
-[{p:"País de América del Sur con capital Buenos Aires",r:"ARGENTINA",t:"e"},
-{p:"País sudamericano donde se habla portugués",r:"BRASIL",t:"e"},
-{p:"País cuya capital es Bogotá",r:"COLOMBIA",t:"e"},
-{p:"Capital de Irlanda, ciudad de la cerveza Guinness",r:"DUBLIN",t:"e"},
-{p:"Famoso físico alemán de la relatividad",r:"EINSTEIN",t:"e"},
-{p:"Baile español con castañuelas y taconeo",r:"FLAMENCO",t:"e"},
-{p:"Instrumento de cuerdas pulsadas de España",r:"GUITARRA",t:"e"},
-{p:"Órgano que filtra toxinas y produce bilis",r:"HIGADO",t:"e"},
-{p:"País europeo con forma de bota",r:"ITALIA",t:"e"},
-{p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
-{p:"Arte marcial japonés con cinturones",r:"KARATE",t:"e"},
-{p:"Satélite natural de la Tierra",r:"LUNA",t:"e"},
-{p:"Compositor austriaco de La Flauta Mágica",r:"MOZART",t:"e"},
-{p:"País escandinavo con capital Oslo",r:"NORUEGA",t:"e"},
-{p:"Instrumento de viento de madera",r:"OBOE",t:"e"},
-{p:"Pintor malagueño del Cubismo",r:"PICASSO",t:"e"},
-{p:"Capital de Ecuador",r:"QUITO",t:"e"},
-{p:"País europeo con capital Bucarest",r:"RUMANIA",t:"e"},
-{p:"Estrella central del sistema solar",r:"SOL",t:"e"},
-{p:"Instrumento de viento de metal del jazz",r:"TROMPETA",t:"e"},
-{p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
-{p:"Capital de Austria",r:"VIENA",t:"e"},
-{p:"Red mundial de información",r:"WEB",t:"e"},
-{p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
-{p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"},
-{p:"Mamífero cánido de pelaje rojizo",r:"ZORRO",t:"e"}
-]
+ {p:"País sudamericano donde se habla portugués",r:"BRASIL",t:"e"},
+ {p:"País cuya capital es Bogotá",r:"COLOMBIA",t:"e"},
+ {p:"Capital de Dinamarca",r:"DINAMARCA",t:"e"},
+ {p:"Famoso físico alemán de la relatividad",r:"EINSTEIN",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"País de África occidental con capital Accra",r:"GHANA",t:"e"},
+ {p:"Desierto más grande del mundo, en África",r:"SAHARA",t:"c"},
+ {p:"Primer humano en orbitar la Tierra, soviético",r:"GAGARIN",t:"c"},
+ {p:"País asiático con capital Tokio",r:"JAPON",t:"e"},
+ {p:"País de Asia Central cuya capital es Astana",r:"KAZAJISTAN",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"País de Asia del Sureste con capital Kuala Lumpur",r:"MALASIA",t:"e"},
+ {p:"País africano más poblado, con capital Abuya",r:"NIGERIA",t:"e"},
+ {p:"Pasta italiana en forma de bolitas, hecha con papa",r:"ÑOQUIS",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Capital de Noruega",r:"OSLO",t:"e"},
+ {p:"Pintor malagueño que creó el Cubismo",r:"PICASSO",t:"e"},
+ {p:"Número que sigue al catorce",r:"QUINCE",t:"e"},
+ {p:"País de África oriental con capital Kigali",r:"RUANDA",t:"e"},
+ {p:"País de Europa del Norte con capital Estocolmo",r:"SUECIA",t:"e"},
+ {p:"País de Asia del Sureste con capital Bangkok",r:"TAILANDIA",t:"e"},
+ {p:"País de América del Sur cuya capital es Montevideo",r:"URUGUAY",t:"e"},
+ {p:"Ciudad italiana famosa por sus canales",r:"VENECIA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"País de América Central cuya capital es Ciudad de México",r:"MEXICO",t:"c"},
+ {p:"Capital de Indonesia, la más poblada del mundo",r:"YAKARTA",t:"e"}],
+
+//── ROSCO 2 ─────────────────────────────────────────────
+[{p:"Ave rapaz símbolo de muchos países",r:"AGUILA",t:"e"},
+ {p:"Capital de Alemania",r:"BERLIN",t:"e"},
+ {p:"País cuya capital es Santiago, de forma alargada",r:"CHILE",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País de la Unión Europea con capital Tallin",r:"ESTONIA",t:"e"},
+ {p:"Baile español con castañuelas y zapateado",r:"FLAMENCO",t:"e"},
+ {p:"Flor amarilla que gira siguiendo al sol",r:"GIRASOL",t:"e"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País de Asia del Sur con capital Islamabad",r:"PAKISTAN",t:"c"},
+ {p:"Especie de ballena que salta y canta",r:"JOROBADA",t:"e"},
+ {p:"País de Asia con capital Nairobi",r:"KENIA",t:"e"},
+ {p:"País africano con capital Monrovia",r:"LIBERIA",t:"e"},
+ {p:"País de África del Oeste con capital Bamako",r:"MALI",t:"e"},
+ {p:"País de Asia con capital Katmandú",r:"NEPAL",t:"e"},
+ {p:"Tubérculo comestible de origen tropical, raíz feculenta",r:"ÑAME",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Asia del Sur con capital Mascate",r:"OMAN",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"País de Asia del Sur con capital Doha",r:"QATAR",t:"e"},
+ {p:"País más extenso del mundo",r:"RUSIA",t:"e"},
+ {p:"País de Europa del Norte con capital Berna",r:"SUIZA",t:"e"},
+ {p:"País de Asia del Sureste con capital Dili",r:"TIMOR ORIENTAL",t:"e"},
+ {p:"País de Europa del Este cuya capital es Kiev",r:"UCRANIA",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"País de Asia del Sureste con capital Naipydó",r:"MYANMAR",t:"c"}],
+
+//── ROSCO 3 ─────────────────────────────────────────────
+[{p:"Continente más extenso del mundo",r:"ASIA",t:"e"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"País asiático más poblado del mundo",r:"CHINA",t:"e"},
+ {p:"Capital de los Emiratos Árabes, la más poblada",r:"DUBAI",t:"e"},
+ {p:"País del norte de África con las pirámides",r:"EGIPTO",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"País de América Central cuya capital es Ciudad de Guatemala",r:"GUATEMALA",t:"e"},
+ {p:"Capital de Cuba",r:"HABANA",t:"e"},
+ {p:"País con la red ferroviaria más grande de Asia",r:"INDIA",t:"e"},
+ {p:"Arte marcial suave de origen japonés",r:"JUDO",t:"e"},
+ {p:"País de Asia Central con capital Bishkek",r:"KIRGUISTAN",t:"e"},
+ {p:"País de Europa del Norte con capital Vilna",r:"LITUANIA",t:"e"},
+ {p:"País de Europa del Sur con capital Valleta",r:"MALTA",t:"e"},
+ {p:"País de América Central con capital Managua",r:"NICARAGUA",t:"e"},
+ {p:"Ave corredora de América del Sur, también llamada suri",r:"ÑANDÚ",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Continente de Australia, Nueva Zelanda y Polinesia",r:"OCEANIA",t:"e"},
+ {p:"País de América Central con canal famoso",r:"PANAMA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"Capital de Letonia",r:"RIGA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"País de África del Norte con capital Túnez",r:"TUNEZ",t:"e"},
+ {p:"País de África oriental con capital Kampala",r:"UGANDA",t:"e"},
+ {p:"País de Asia del Sureste con capital Hanói",r:"VIETNAM",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 4 ─────────────────────────────────────────────
+[{p:"Instrumento de cuerda con forma triangular",r:"ARPA",t:"e"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Capital de Australia",r:"CANBERRA",t:"e"},
+ {p:"País nórdico con capital Copenhague",r:"DINAMARCA",t:"e"},
+ {p:"País de Europa con capital Madrid",r:"ESPANA",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Primer cosmonauta soviético en orbitar la Tierra",r:"GAGARIN",t:"e"},
+ {p:"País europeo con capital Budapest",r:"HUNGRIA",t:"e"},
+ {p:"País insular del Atlántico norte con capital Reikiavik",r:"ISLANDIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"País insular del Pacífico con capital Tarawa",r:"KIRIBATI",t:"e"},
+ {p:"País de Europa del Norte con capital Riga",r:"LETONIA",t:"e"},
+ {p:"País de África oriental con capital Antananarivo",r:"MADAGASCAR",t:"e"},
+ {p:"País de África del Sur con capital Windhoek",r:"NAMIBIA",t:"e"},
+ {p:"Raíz tropical comestible muy usada en África y el Caribe",r:"ÑAME",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Mineral de hierro más abundante en la Tierra",r:"OXIDO",t:"e"},
+ {p:"País de Asia del Sur con capital Islamabad",r:"PAKISTAN",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"Capital de Arabia Saudí",r:"RIAD",t:"e"},
+ {p:"País de Asia del Sur con capital Colombo",r:"SRI LANKA",t:"e"},
+ {p:"País de Asia Central con capital Dusambé",r:"TAYIKISTAN",t:"e"},
+ {p:"País de Asia Central con capital Taskent",r:"UZBEKISTAN",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 5 ─────────────────────────────────────────────
+[{p:"Capital de Australia",r:"CANBERRA",t:"c"},
+ {p:"Deporte en que se golpea una pelota con un bate",r:"BEISBOL",t:"e"},
+ {p:"Instrumento de teclas negras y blancas",r:"CLAVICORDIO",t:"e"},
+ {p:"Instrumento de viento madera con cuerpo cilíndrico",r:"DULZAINA",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"Instrumento de viento de madera en la orquesta",r:"FLAUTA",t:"e"},
+ {p:"País del sur de Europa con capital Atenas",r:"GRECIA",t:"e"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País de Europa del Norte con capital Dublín",r:"IRLANDA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"País de África del Norte con capital Trípoli",r:"LIBIA",t:"e"},
+ {p:"País de Asia del Sur con capital Male",r:"MALDIVAS",t:"e"},
+ {p:"País de Oceanía con capital Wellington",r:"NUEVA ZELANDA",t:"e"},
+ {p:"Bolitas de masa de papa y harina típicas de Italia",r:"ÑOQUIS",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Primera vocal del alfabeto español",r:"VOCAL",t:"c"},
+ {p:"País de América del Sur con capital Lima",r:"PERU",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Sur con capital Lisboa",r:"PORTUGAL",t:"c"},
+ {p:"País de África del Norte con capital Jartum",r:"SUDAN",t:"e"},
+ {p:"País de Asia Central con capital Ashgabat",r:"TURKMENISTAN",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 6 ─────────────────────────────────────────────
+[{p:"Río más largo de América del Sur",r:"AMAZONAS",t:"e"},
+ {p:"Ave de rapaz nocturna",r:"BUHO",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Dios griego del mar",r:"POSEIDON",t:"c"},
+ {p:"Capital de Etiopía",r:"ADDIS ABEBA",t:"c"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"País africano con capital Libreville",r:"GABON",t:"e"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País de Asia con capital Bagdad",r:"IRAK",t:"e"},
+ {p:"País de Oriente Medio con capital Amán",r:"JORDANIA",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"País de Asia del Sureste con capital Vientiane",r:"LAOS",t:"e"},
+ {p:"País de América del Norte con capital Ciudad de México",r:"MEXICO",t:"e"},
+ {p:"Capital de Níger",r:"NIAMEY",t:"e"},
+ {p:"Ave ratite sudamericana cuyas plumas adornan trajes gauchos",r:"ÑANDÚ",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de América del Sur con capital Asunción",r:"PARAGUAY",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de América del Sur con capital Lima",r:"PERU",t:"c"},
+ {p:"País de Europa del Sur con capital Madrid",r:"ESPANA",t:"c"},
+ {p:"País de Asia del Sur con capital Ankara",r:"TURQUIA",t:"e"},
+ {p:"País de América del Norte con capital Washington",r:"ESTADOS UNIDOS",t:"c"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 7 ─────────────────────────────────────────────
+[{p:"Río más largo de América del Sur",r:"AMAZONAS",t:"e"},
+ {p:"País del sur de América con capital La Paz",r:"BOLIVIA",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País del Golfo Pérsico con capital Teherán",r:"IRAN",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"País de Oriente Medio con capital Beirut",r:"LIBANO",t:"e"},
+ {p:"País de África austral con capital Maputo",r:"MOZAMBIQUE",t:"e"},
+ {p:"Primer país en pisar la Luna, según el programa Apolo",r:"ESTADOS UNIDOS",t:"c"},
+ {p:"Pasta italiana hecha con papa, en forma redonda",r:"ÑOQUIS",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de América del Sur con capital Quito",r:"ECUADOR",t:"c"},
+ {p:"País de Europa del Norte con capital Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"País de América del Sur con capital Paramaribo",r:"SURINAM",t:"e"},
+ {p:"País de África oriental con capital Dodoma",r:"TANZANIA",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 8 ─────────────────────────────────────────────
+[{p:"Océano que baña las costas de Europa y América",r:"ATLANTICO",t:"e"},
+ {p:"Capital de Hungría, a orillas del Danubio",r:"BUDAPEST",t:"e"},
+ {p:"País centroamericano con capital San José",r:"COSTA RICA",t:"e"},
+ {p:"Capital de la India",r:"DELHI",t:"e"},
+ {p:"Instrumento electrónico de cuerdas inventado en el siglo XX",r:"THEREMIN",t:"c"},
+ {p:"País asiático con capital Manila",r:"FILIPINAS",t:"e"},
+ {p:"Deporte olímpico con palos y hoyos",r:"GOLF",t:"e"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"País de Asia del Sur con capital Colombo",r:"SRI LANKA",t:"c"},
+ {p:"Capital de Perú, fundada por Francisco Pizarro",r:"LIMA",t:"e"},
+ {p:"País de Europa del Este con capital Chisinau",r:"MOLDAVIA",t:"e"},
+ {p:"País de Asia del Sureste con capital Naipydó",r:"MYANMAR",t:"c"},
+ {p:"Planta tropical cuya raíz se come hervida o asada",r:"ÑAME",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur con capital Lisboa",r:"PORTUGAL",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de África del Norte con capital Rabat",r:"MARRUECOS",t:"c"},
+ {p:"País de Asia del Sureste con capital Singapur",r:"SINGAPUR",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 9 ─────────────────────────────────────────────
+[{p:"Deporte en que se baten dos equipos con raquetas sobre una red",r:"BADMINTON",t:"c"},
+ {p:"Fruta pequeña de color azul oscuro o rojo",r:"BAYA",t:"e"},
+ {p:"País andino cuya capital es Quito",r:"ECUADOR",t:"c"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País europeo cuya capital es París",r:"FRANCIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"País de Asia Central con capital Ulan Bator",r:"MONGOLIA",t:"e"},
+ {p:"País de Europa del Norte con capital Helsinki",r:"FINLANDIA",t:"c"},
+ {p:"El mayor de los ñandúes, ave no voladora de la pampa argentina",r:"ÑANDÚ",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de teclado con tubos y pedales",r:"ORGANO",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"País de África austral con capital Mbabane",r:"SUAZILANDIA",t:"e"},
+ {p:"País de Asia del Sureste con capital Bangkok",r:"TAILANDIA",t:"e"},
+ {p:"Capital de Mozambique",r:"MAPUTO",t:"c"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 10 ─────────────────────────────────────────────
+[{p:"Río más largo de América del Sur",r:"AMAZONAS",t:"e"},
+ {p:"País africano con capital Uagadugú",r:"BURKINA FASO",t:"e"},
+ {p:"Deporte de pelota y palos en campo verde",r:"CRICKET",t:"e"},
+ {p:"Personaje de Disney que es un pato",r:"DONALD",t:"e"},
+ {p:"Primera mujer en ganar el Nobel de Física",r:"CURIE",t:"c"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"País de Asia con capital Tbilisi",r:"GEORGIA",t:"e"},
+ {p:"País insular de las Antillas de lengua francesa",r:"HAITI",t:"e"},
+ {p:"País de Europa del Norte con capital Tallín",r:"ESTONIA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"País de Europa del Sur con capital Lisboa",r:"PORTUGAL",t:"c"},
+ {p:"País de Europa del Sur con capital Mónaco",r:"MONACO",t:"e"},
+ {p:"País escandinavo con capital Oslo y fiordos",r:"NORUEGA",t:"e"},
+ {p:"Tela pequeña usada para secar o adornar",r:"PAÑUELO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Asia del Sureste con capital Manila",r:"FILIPINAS",t:"c"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"País de Europa del Este con capital Belgrado",r:"SERBIA",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"País de Europa del Norte con capital Oslo",r:"NORUEGA",t:"c"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 11 ─────────────────────────────────────────────
+[{p:"Río más largo de América del Sur",r:"AMAZONAS",t:"e"},
+ {p:"Animal rayado de la sabana africana",r:"CEBRA",t:"c"},
+ {p:"País norteamericano con capital Ottawa",r:"CANADA",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País africano con capital Asmara",r:"ERITREA",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"Capital de Perú, fundada por Pizarro",r:"LIMA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Instrumento de cuerda pulsada de origen árabe",r:"LAUD",t:"e"},
+ {p:"País de Oceanía con capital Majuro",r:"ISLAS MARSHALL",t:"c"},
+ {p:"País de Asia del Sur con capital Katmandú",r:"NEPAL",t:"e"},
+ {p:"Infante de sexo masculino",r:"NIÑO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"País de África del Norte con capital Mogadiscio",r:"SOMALIA",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 12 ─────────────────────────────────────────────
+[{p:"Capital de Grecia, cuna de la democracia",r:"ATENAS",t:"e"},
+ {p:"Instrumento de cuerda pulsada con mango largo",r:"BANJO",t:"e"},
+ {p:"Figura geométrica redonda",r:"CIRCULO",t:"e"},
+ {p:"Fruto seco que viene de la palmera datilera",r:"DATIL",t:"e"},
+ {p:"Forma geométrica ovalada",r:"ELIPSE",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País de Europa del Norte con capital Helsinki",r:"FINLANDIA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"País de Oriente Medio con capital Kuwait City",r:"KUWAIT",t:"e"},
+ {p:"País de Europa con capital Vaduz",r:"LIECHTENSTEIN",t:"e"},
+ {p:"País de África occidental con capital Nuakchot",r:"MAURITANIA",t:"e"},
+ {p:"País de África del Norte con capital Niamey",r:"NIGER",t:"e"},
+ {p:"Idioma oficial de España y la mayoría de Latinoamérica",r:"ESPAÑOL",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Kiev",r:"UCRANIA",t:"c"},
+ {p:"Capital de El Salvador",r:"SAN SALVADOR",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 13 ─────────────────────────────────────────────
+[{p:"Fruta tropical de cáscara espinosa y sabor dulce",r:"ANANAS",t:"e"},
+ {p:"País de Europa con capital Bruselas",r:"BELGICA",t:"e"},
+ {p:"Pintor del Guernica",r:"PICASSO",t:"c"},
+ {p:"País de África oriental con capital Yibuti",r:"DJIBOUTI",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Instrumento de cuerda con seis cuerdas",r:"GUITARRA",t:"e"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"País de África oriental con capital Yibuti",r:"DJIBOUTI",t:"c"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"País insular del Océano Índico con capital Port Louis",r:"MAURICIO",t:"e"},
+ {p:"País de América del Norte con capital Ottawa",r:"CANADA",t:"c"},
+ {p:"Muñeco articulado de trapo o plástico para jugar",r:"MUÑECA",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"País de Europa del Sur con capital Madrid",r:"ESPANA",t:"c"},
+ {p:"País de Asia del Sur con capital Islamabad",r:"PAKISTAN",t:"c"},
+ {p:"Capital de Lesoto",r:"MASERU",t:"c"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"País de Asia del Sureste con capital Rangún",r:"MYANMAR",t:"c"}],
+
+//── ROSCO 14 ─────────────────────────────────────────────
+[{p:"Río más largo de América del Sur",r:"AMAZONAS",t:"e"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"País de Europa con capital Praga",r:"REPUBLICA CHECA",t:"c"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País de América Central con capital San Salvador",r:"EL SALVADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"País de África del Sur con capital Maseru",r:"LESOTO",t:"e"},
+ {p:"País de Asia con capital Naipydó",r:"MYANMAR",t:"e"},
+ {p:"País escandinavo con capital Oslo y fiordos",r:"NORUEGA",t:"e"},
+ {p:"Gran elevación natural del terreno",r:"MONTAÑA",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"País de Africa central con capital Yaundé",r:"CAMERUN",t:"c"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 15 ─────────────────────────────────────────────
+[{p:"Escritora de 'Orgullo y Prejuicio'",r:"AUSTEN",t:"e"},
+ {p:"Músico alemán compositor de la Quinta Sinfonía",r:"BEETHOVEN",t:"e"},
+ {p:"Animal de desierto con una o dos jorobas",r:"CAMELLO",t:"e"},
+ {p:"País de América Central con capital Santo Domingo",r:"REPUBLICA DOMINICANA",t:"c"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"Instrumento de viento de metal pequeño",r:"FLAUTA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País de Asia del Este con capital Pekín",r:"CHINA",t:"c"},
+ {p:"Destreza o habilidad especial para hacer algo",r:"MAÑA",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 16 ─────────────────────────────────────────────
+[{p:"Desierto más grande del mundo, en África",r:"SAHARA",t:"c"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"Animal que cambia de color",r:"CAMALEON",t:"c"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Animal doméstico que maúlla",r:"GATO",t:"e"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País de América Central con capital Managua",r:"NICARAGUA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"c"},
+ {p:"Tubo por donde circula agua o gas en una ciudad",r:"CAÑERÍA",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Asia del Sureste con capital Yakarta",r:"INDONESIA",t:"c"},
+ {p:"País de Asia del Sur con capital Katmandú",r:"NEPAL",t:"c"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Norte con capital Oslo",r:"NORUEGA",t:"c"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 17 ─────────────────────────────────────────────
+[{p:"Primera letra del abecedario",r:"ALFA",t:"e"},
+ {p:"País de Asia del Sur con capital Dacca",r:"BANGLADESH",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Animal de mar con muchos tentáculos",r:"MEDUSA",t:"c"},
+ {p:"País del este de África con capital Nairobi",r:"KENIA",t:"c"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País de Asia del Sur con capital Colombo",r:"SRI LANKA",t:"c"},
+ {p:"El que posee o es propietario de algo",r:"DUEÑO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"País de África occidental con capital Dakar",r:"SENEGAL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 18 ─────────────────────────────────────────────
+[{p:"País de Europa del Sur con capital Lisboa",r:"PORTUGAL",t:"c"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"País de África central con capital Yaundé",r:"CAMERUN",t:"e"},
+ {p:"Instrumento de cuerda de la familia del laud",r:"MANDOLINA",t:"c"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País de Asia con capital Bangkok",r:"TAILANDIA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Capital de Finlandia",r:"HELSINKI",t:"c"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País escandinavo con capital Oslo y fiordos",r:"NORUEGA",t:"e"},
+ {p:"Parte del día que viene justo después de la noche",r:"MAÑANA",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"País de Asia del Sureste con capital Yakarta",r:"INDONESIA",t:"c"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 19 ─────────────────────────────────────────────
+[{p:"Instrumento musical de viento, primo del trombón",r:"TUBA",t:"c"},
+ {p:"Deporte que se juega con una pelota naranja en canasta",r:"BALONCESTO",t:"e"},
+ {p:"Instrumento de cuatro cuerdas parecido al violín",r:"CELLO",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País de África occidental con capital Malabo",r:"GUINEA ECUATORIAL",t:"c"},
+ {p:"País de África central con capital Bangui",r:"REPUBLICA CENTROAFRICANA",t:"c"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País de Europa del Este con capital Sofía",r:"BULGARIA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Capital de Ucrania",r:"KIEV",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de Camboya",r:"PHNOM PENH",t:"c"},
+ {p:"País de América del Sur con capital Buenos Aires",r:"ARGENTINA",t:"c"},
+ {p:"País de la Península Ibérica cuya capital es Madrid",r:"ESPAÑA",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Capital de Mozambique",r:"MAPUTO",t:"c"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"Capital de Lesoto",r:"MASERU",t:"c"},
+ {p:"Capital de Lesoto",r:"MASERU",t:"c"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 20 ─────────────────────────────────────────────
+[{p:"Pintor que pintó la Capilla Sixtina",r:"MIGUEL ANGEL",t:"c"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Escritor español del Siglo de Oro",r:"QUEVEDO",t:"c"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"Instrumento de cuatro cuerdas que se toca con arco",r:"VIOLIN",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"País de África occidental con capital Abiyán",r:"COSTA DE MARFIL",t:"c"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País de Europa del Sur con capital Madrid",r:"ESPANA",t:"c"},
+ {p:"Lámina córnea que cubre la punta de los dedos",r:"UÑA",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de África central con capital Yaundé",r:"CAMERUN",t:"c"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Capital de Burkina Faso",r:"UAGADUGU",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 21 ─────────────────────────────────────────────
+[{p:"Río más largo de América del Sur",r:"AMAZONAS",t:"e"},
+ {p:"Danza folclórica argentina en pareja",r:"MALAMBO",t:"c"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"País insular con capital Roseau",r:"DOMINICA",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ciencia que estudia la Tierra",r:"GEOLOGIA",t:"e"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"Capital de Paraguay",r:"ASUNCION",t:"c"},
+ {p:"Brote nuevo que emerge de una planta o árbol",r:"RETOÑO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Asia del Sur con capital Colombo",r:"SRI LANKA",t:"c"},
+ {p:"País de Asia del Sur con capital Colombo",r:"SRI LANKA",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"País de Africa del Sur con capital Pretoria",r:"SUDAFRICA",t:"c"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 22 ─────────────────────────────────────────────
+[{p:"Río más largo de América del Sur",r:"AMAZONAS",t:"e"},
+ {p:"País de Oriente Medio con capital Manama",r:"BAREIN",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Fruta de piel suave y hueso dentro",r:"DURAZNO",t:"e"},
+ {p:"País de Europa con capital Atenas",r:"GRECIA",t:"c"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"País de América del Sur con capital Georgetown",r:"GUYANA",t:"e"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País de Europa con capital Praga",r:"REPUBLICA CHECA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"País de Asia del Sur con capital Colombo",r:"SRI LANKA",t:"c"},
+ {p:"Capital de Mozambique",r:"MAPUTO",t:"e"},
+ {p:"País africano con capital Windhoek",r:"NAMIBIA",t:"e"},
+ {p:"Herida producida por un arma blanca o cuchillo",r:"PUÑALADA",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Asia del Este con capital Ulan Bator",r:"MONGOLIA",t:"c"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Capital de Etiopía",r:"ADDIS ABEBA",t:"c"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de Europa del Este con capital Chisinau",r:"MOLDAVIA",t:"c"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 23 ─────────────────────────────────────────────
+[{p:"País de América Central con capital San José",r:"COSTA RICA",t:"c"},
+ {p:"Baile de salón de origen latinoamericano con ritmo lento",r:"BOLERO",t:"e"},
+ {p:"País de Europa con capital Zagreb",r:"CROACIA",t:"e"},
+ {p:"Capital de Senegal",r:"DAKAR",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Capital de Afganistán",r:"KABUL",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País de Asia del Sureste con capital Bangkok",r:"TAILANDIA",t:"c"},
+ {p:"Título de respeto femenino antes del nombre propio",r:"DOÑA",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Capital de Costa Rica",r:"SAN JOSE",t:"c"},
+ {p:"Capital de Uganda",r:"KAMPALA",t:"c"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 24 ─────────────────────────────────────────────
+[{p:"Río que atraviesa París",r:"SENA",t:"c"},
+ {p:"País norteafricano con capital Trípoli",r:"LIBIA",t:"c"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"País de Asia cuya capital es Dhaka",r:"BANGLADESH",t:"c"},
+ {p:"Escritor irlandés de Ulises",r:"JOYCE",t:"c"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País de África del Norte con capital Trípoli",r:"LIBIA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País escandinavo con capital Oslo y fiordos",r:"NORUEGA",t:"e"},
+ {p:"Madera cortada en trozos para la chimenea",r:"LEÑA",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Asia del Sureste con capital Rangún",r:"MYANMAR",t:"c"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 25 ─────────────────────────────────────────────
+[{p:"Unidad básica de la materia",r:"ATOMO",t:"e"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Personaje literario que luchaba contra molinos de viento",r:"DON QUIJOTE",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País que tiene la Torre Eiffel",r:"FRANCIA",t:"e"},
+ {p:"País de África occidental con capital Conakri",r:"GUINEA",t:"e"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de Siria",r:"DAMASCO",t:"c"},
+ {p:"País de África central con capital Bangui",r:"REPUBLICA CENTROAFRICANA",t:"c"},
+ {p:"Aviso o marca que indica o comunica algo",r:"SEÑAL",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Norte con capital Tallin",r:"ESTONIA",t:"c"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 26 ─────────────────────────────────────────────
+[{p:"País africano con capital Nairobi",r:"KENIA",t:"c"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Escritor de Don Quijote",r:"CERVANTES",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País de Europa del Norte con capital Tallín",r:"ESTONIA",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"País de Asia del Sureste con capital Manila",r:"FILIPINAS",t:"c"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País de Europa del Norte con capital Helsinki",r:"FINLANDIA",t:"c"},
+ {p:"Vino o queso que ha envejecido durante mucho tiempo",r:"AÑEJO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"c"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 27 ─────────────────────────────────────────────
+[{p:"Río más largo de América del Sur",r:"AMAZONAS",t:"e"},
+ {p:"Capital de Colombia",r:"BOGOTA",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Capital de Qatar",r:"DOHA",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"Capital de Camboya",r:"PHNOM PENH",t:"c"},
+ {p:"País de Oriente Medio con capital Amán",r:"JORDANIA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"País de Europa del Este con capital Chisinau",r:"MOLDAVIA",t:"c"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"Capital de Camboya",r:"PHNOM PENH",t:"c"},
+ {p:"Perjuicio o deterioro causado a una persona o cosa",r:"DAÑO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Capital de Camboya",r:"PHNOM PENH",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"País de África del Sur con capital Pretoria",r:"SUDAFRICA",t:"e"},
+ {p:"País de Asia del Sureste con capital Hanói",r:"VIETNAM",t:"c"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 28 ─────────────────────────────────────────────
+[{p:"Animal más alto del mundo",r:"JIRAFA",t:"c"},
+ {p:"Planta que solo florece una vez y luego muere",r:"BAMBU",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"País de Europa del Norte con capital Dublín",r:"IRLANDA",t:"c"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo donde nació Mozart",r:"AUSTRIA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"País de Asia con capital Kuala Lumpur",r:"MALASIA",t:"c"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País escandinavo con capital Oslo y fiordos",r:"NORUEGA",t:"e"},
+ {p:"Pedazo de madera grueso para quemar en la chimenea",r:"LEÑO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Capital de Camboya",r:"PHNOM PENH",t:"c"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de África del Sur con capital Pretoria",r:"SUDAFRICA",t:"c"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 29 ─────────────────────────────────────────────
+[{p:"Instrumento de viento de metal en forma de tubo enroscado",r:"TROMPA",t:"c"},
+ {p:"Deporte de combate con guantes",r:"BOXEO",t:"e"},
+ {p:"País de Europa del Norte con capital Copenhague",r:"DINAMARCA",t:"c"},
+ {p:"Capital de Irlanda",r:"DUBLIN",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Instrumento de percusión de metal que se golpea",r:"GONG",t:"e"},
+ {p:"Forma geométrica de seis lados",r:"HEXAGONO",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Capital de Angola",r:"LUANDA",t:"e"},
+ {p:"País de África del Norte con capital Rabat",r:"MARRUECOS",t:"e"},
+ {p:"País de Asia del Sur con capital Islamabad",r:"PAKISTAN",t:"c"},
+ {p:"Color del cabello entre rubio y negro, como la avellana",r:"CASTAÑO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Capital de Paraguay",r:"ASUNCION",t:"c"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 30 ─────────────────────────────────────────────
+[{p:"País nórdico con capital Estocolmo",r:"SUECIA",t:"c"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País de Europa con capital Atenas",r:"GRECIA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"País de Europa del Sur con capital Valleta",r:"MALTA",t:"c"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País escandinavo con capital Oslo y fiordos",r:"NORUEGA",t:"e"},
+ {p:"Sueño agradable o fantasía de la mente despierta",r:"ENSUEÑO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"País de America del Sur con capital Georgetown",r:"GUYANA",t:"c"}],
+
+//── ROSCO 31 ─────────────────────────────────────────────
+[{p:"Disciplina artística que combina música y movimiento corporal",r:"DANZA",t:"c"},
+ {p:"País de Europa del Este con capital Minsk",r:"BIELORRUSIA",t:"e"},
+ {p:"Instrumento de viento de madera con registro grave",r:"CONTRAFAGOT",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"Instrumento de cuerda de la orquesta con mayor agudeza",r:"VIOLIN",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"País de Asia del Sur con capital Islamabad",r:"PAKISTAN",t:"c"},
+ {p:"Capital de Eslovenia",r:"LIUBLIANA",t:"e"},
+ {p:"País de Asia del Sureste con capital Rangún",r:"MYANMAR",t:"e"},
+ {p:"Capital de Costa Rica",r:"SAN JOSE",t:"c"},
+ {p:"Lazo decorativo hecho con una cinta en el pelo",r:"MOÑO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Capital de Mozambique",r:"MAPUTO",t:"c"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"País de America del Sur con capital Caracas",r:"VENEZUELA",t:"c"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 32 ─────────────────────────────────────────────
+[{p:"Oso del bambú, animal símbolo de China",r:"PANDA",t:"c"},
+ {p:"Instrumento musical de percusión de dos palos",r:"BONGOS",t:"e"},
+ {p:"País de Asia del Este con capital Pekín",r:"CHINA",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"País asiático con capital Ulan Bator",r:"MONGOLIA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"País de África del Sur con capital Lilongüe",r:"MALAWI",t:"c"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País de Asia del Sureste con capital Yakarta",r:"INDONESIA",t:"c"},
+ {p:"Tela de lana o fibra gruesa usada en confección",r:"PAÑO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"c"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 33 ─────────────────────────────────────────────
+[{p:"País de América del Sur famoso por el tango",r:"ARGENTINA",t:"e"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Ave de rapiña que planea en los Andes",r:"CONDOR",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País escandinavo con capital Oslo y fiordos",r:"NORUEGA",t:"e"},
+ {p:"Objeto decorativo lleno de dulces que se rompe con un palo",r:"PIÑATA",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"c"},
+ {p:"Capital de Costa Rica",r:"SAN JOSE",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 34 ─────────────────────────────────────────────
+[{p:"Deporte olímpico en que el arquero lanza flechas",r:"ARQUERIA",t:"e"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Capital de Chipre",r:"NICOSIA",t:"c"},
+ {p:"Capital de Yemen",r:"ADEN",t:"c"},
+ {p:"País de América del Sur con capital Lima",r:"PERU",t:"c"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País de Asia del Este con capital Pekín",r:"CHINA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País escandinavo con capital Oslo y fiordos",r:"NORUEGA",t:"e"},
+ {p:"Fruto del pino, semilla comestible de pequeño tamaño",r:"PIÑÓN",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Norte con capital Oslo",r:"NORUEGA",t:"c"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"País de Asia del Sureste con capital Vientiane",r:"LAOS",t:"c"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"País de America del Sur con capital Georgetown",r:"GUYANA",t:"c"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 35 ─────────────────────────────────────────────
+[{p:"Volcán activo más alto del mundo, en los Andes",r:"ACONCAGUA",t:"e"},
+ {p:"País de África oriental con capital Bujumbura",r:"BURUNDI",t:"e"},
+ {p:"País insular de las Antillas cuya capital es La Habana",r:"CUBA",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Escritor colombiano del 'realismo mágico'",r:"GARCIA MARQUEZ",t:"e"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País de Europa del Este con capital Kiev",r:"UCRANIA",t:"c"},
+ {p:"Paso estrecho entre montañas con paredes verticales",r:"CAÑÓN",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Capital de Paraguay",r:"ASUNCION",t:"c"},
+ {p:"País de Africa central con capital Bangui",r:"REPUBLICA CENTROAFRICANA",t:"c"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 36 ─────────────────────────────────────────────
+[{p:"Nave espacial que llevó al hombre a la Luna",r:"APOLO",t:"e"},
+ {p:"Ciencia que estudia los seres vivos",r:"BIOLOGIA",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País de Europa del Norte con capital Reikiavik",r:"ISLANDIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Capital de Togo",r:"LOME",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País de Asia del Este con capital Pekín",r:"CHINA",t:"c"},
+ {p:"Persona sosa, aburrida o excesivamente cursi",r:"ÑOÑO",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Asia del Este con capital Seúl",r:"COREA DEL SUR",t:"c"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 37 ─────────────────────────────────────────────
+[{p:"Autor del Quijote",r:"CERVANTES",t:"c"},
+ {p:"Capital de Brasil",r:"BRASILIA",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"Instrumento de cuatro cuerdas que se toca con arco",r:"CELLO",t:"c"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Capital de Ruanda",r:"KIGALI",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País con más islas del mundo",r:"INDONESIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"País de Europa del Este con capital Vilna",r:"LITUANIA",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"Capital de Chile",r:"SANTIAGO",t:"c"},
+ {p:"Estado de reposo con imágenes en la mente durante la noche",r:"SUEÑO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de África central con capital Bangui",r:"REPUBLICA CENTROAFRICANA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Capital de Namibia",r:"WINDHOEK",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 38 ─────────────────────────────────────────────
+[{p:"País isleño de Oceanía con capital Wellington",r:"NUEVA ZELANDA",t:"c"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"País de América del Norte con capital Ciudad de México",r:"MEXICO",t:"c"},
+ {p:"Capital de Tanzania",r:"DAR ES SALAAM",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"Ciudad italiana famosa por sus canales",r:"VENECIA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas hawaiano",r:"UKELELE",t:"c"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País de Asia del Sur con capital Colombo",r:"SRI LANKA",t:"c"},
+ {p:"Terreno plantado de vides para producir uva y vino",r:"VIÑA",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"País de Asia del Sureste con capital Kuala Lumpur",r:"MALASIA",t:"c"},
+ {p:"Capital de Chile",r:"SANTIAGO",t:"c"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 39 ─────────────────────────────────────────────
+[{p:"Capital de Austria, ciudad de Mozart",r:"VIENA",t:"c"},
+ {p:"Instrumento de metal de la familia del trombón",r:"BOMBARDINO",t:"e"},
+ {p:"Animal marino de caparazón",r:"CANGREJO",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País de América del Norte con frontera con EEUU",r:"MEXICO",t:"c"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"País de Asia del Sureste con capital Kuala Lumpur",r:"MALASIA",t:"c"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País de Europa del Norte con capital Tallin",r:"ESTONIA",t:"c"},
+ {p:"Primera etapa de la vida de una persona, la infancia",r:"NIÑEZ",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Capital de Chile",r:"SANTIAGO",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 40 ─────────────────────────────────────────────
+[{p:"Instrumento de doble lengüeta de la orquesta",r:"FAGOT",t:"c"},
+ {p:"Capital de Cuba, la más grande del Caribe",r:"HABANA",t:"c"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Filósofo griego que usaba una linterna buscando a un hombre honesto",r:"DIOGENES",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de Asia con capital Pekín",r:"CHINA",t:"c"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País escandinavo con capital Oslo y fiordos",r:"NORUEGA",t:"e"},
+ {p:"Tratamiento de respeto para una mujer adulta casada",r:"SEÑORA",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 41 ─────────────────────────────────────────────
+[{p:"Río más largo de América del Sur",r:"AMAZONAS",t:"e"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País europeo donde nació Beethoven",r:"ALEMANIA",t:"c"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País de Europa del Este con capital Kiev",r:"UCRANIA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"País de Asia Central con capital Dusambé",r:"TAYIKISTAN",t:"c"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País escandinavo con capital Oslo y fiordos",r:"NORUEGA",t:"e"},
+ {p:"Prenda absorbente que se usa en bebés recién nacidos",r:"PAÑAL",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de África central con capital Bangui",r:"REPUBLICA CENTROAFRICANA",t:"c"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"País de Europa del Norte con capital Tallin",r:"ESTONIA",t:"c"},
+ {p:"Capital de Argentina",r:"BUENOS AIRES",t:"c"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 42 ─────────────────────────────────────────────
+[{p:"Animal con el cuello más largo",r:"JIRAFA",t:"c"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"Capital de Escocia",r:"EDIMBURGO",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"País de Asia Central con capital Bishkek",r:"KIRGUISTAN",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"Río que atraviesa El Cairo",r:"NILO",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"País de Asia del Este con capital Ulan Bator",r:"MONGOLIA",t:"c"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País de Asia del Sureste con capital Manila",r:"FILIPINAS",t:"c"},
+ {p:"Acción de lavarse el cuerpo en agua",r:"BAÑO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Asia del Sureste con capital Vientiane",r:"LAOS",t:"c"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de África del Norte con capital Rabat",r:"MARRUECOS",t:"c"},
+ {p:"País de Europa del Norte con capital Tallin",r:"ESTONIA",t:"c"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"País de Europa del Este con capital Kiev",r:"UCRANIA",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 43 ─────────────────────────────────────────────
+[{p:"Figura geométrica de tres lados",r:"TRIANGULO",t:"c"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País de Asia con capital Pekín",r:"CHINA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"País de Europa del Norte con capital Reikiavik",r:"ISLANDIA",t:"c"},
+ {p:"Capital de Costa de Marfil",r:"YAMOUSUKRO",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"c"},
+ {p:"Persona de sexo femenino en su infancia",r:"NIÑA",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 44 ─────────────────────────────────────────────
+[{p:"Capital de Canadá",r:"OTTAWA",t:"c"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"Animal de cuatro patas que vive en el agua y tierra",r:"HIPOPOTAMO",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"País de América con capital Kingston",r:"JAMAICA",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País de África occidental con capital Dakar",r:"SENEGAL",t:"c"},
+ {p:"Fruto del castaño, de sabor dulce y color marrón",r:"CASTAÑA",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"País de Asia del Sureste con capital Manila",r:"FILIPINAS",t:"c"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"País de Africa occidental con capital Conakri",r:"GUINEA",t:"c"},
+ {p:"País europeo con capital Bratislava",r:"ESLOVAQUIA",t:"c"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 45 ─────────────────────────────────────────────
+[{p:"País que tiene la bandera con la hoja de arce",r:"CANADA",t:"c"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"País africano cuya capital es Ndjaména",r:"CHAD",t:"c"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de Uganda",r:"KAMPALA",t:"c"},
+ {p:"País escandinavo con capital Oslo y fiordos",r:"NORUEGA",t:"e"},
+ {p:"Color marrón rojizo del cabello o de la madera del árbol",r:"CASTAÑO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Este con capital Chisinau",r:"MOLDAVIA",t:"c"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de África del Norte con capital Argel",r:"ARGELIA",t:"c"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 46 ─────────────────────────────────────────────
+[{p:"Fruta amarilla curvada",r:"BANANA",t:"c"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Escritor irlandés de Ulises",r:"JOYCE",t:"c"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Capital de Senegal",r:"DAKAR",t:"c"},
+ {p:"País de América del Sur con capital Bogotá",r:"COLOMBIA",t:"c"},
+ {p:"País de Asia del Este con capital Ulan Bator",r:"MONGOLIA",t:"e"},
+ {p:"País escandinavo con capital Oslo y fiordos",r:"NORUEGA",t:"e"},
+ {p:"Marca o lesión en la piel dejada por un rasguño",r:"ARAÑO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de África central con capital Bangui",r:"REPUBLICA CENTROAFRICANA",t:"c"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 47 ─────────────────────────────────────────────
+[{p:"Instrumento de teclado más común",r:"PIANO",t:"c"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"Animal marino más grande del mundo",r:"BALLENA",t:"c"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Animal veloz de las llanuras africanas",r:"GUEPARDO",t:"e"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País de África del Norte con capital Argel",r:"ARGELIA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País escandinavo con capital Oslo y fiordos",r:"NORUEGA",t:"e"},
+ {p:"Disparo de cañón o explosión de gran estruendo",r:"CAÑONAZO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Capital de Argentina",r:"BUENOS AIRES",t:"c"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"Instrumento de cuatro cuerdas de Hawái",r:"UKELELE",t:"e"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 48 ─────────────────────────────────────────────
+[{p:"Río más largo de América del Sur",r:"AMAZONAS",t:"e"},
+ {p:"País de América Central con capital Belmopán",r:"BELICE",t:"e"},
+ {p:"Felino más veloz del planeta",r:"CHITA",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"País nórdico con capital Helsinki",r:"FINLANDIA",t:"e"},
+ {p:"Ave de rapiña símbolo de los Andes americanos",r:"AGUILA",t:"c"},
+ {p:"País de América Central con capital Tegucigalpa",r:"HONDURAS",t:"e"},
+ {p:"País de Europa con capital Berna",r:"SUIZA",t:"c"},
+ {p:"Planeta más grande del sistema solar",r:"JUPITER",t:"e"},
+ {p:"Arte marcial japonés con cinturones de colores",r:"KARATE",t:"e"},
+ {p:"Satélite natural que orbita la Tierra",r:"LUNA",t:"e"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País escandinavo con capital Oslo y fiordos",r:"NORUEGA",t:"e"},
+ {p:"Esfuerzo intenso y dedicación para lograr algo",r:"EMPEÑO",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"País de África del Norte con capital Rabat",r:"MARRUECOS",t:"c"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Capital de Ecuador",r:"QUITO",t:"e"},
+ {p:"País de Europa del Este con capital Bucarest",r:"RUMANIA",t:"e"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Felino rayado de Asia",r:"TIGRE",t:"e"},
+ {p:"País europeo con capital Bratislava",r:"ESLOVAQUIA",t:"c"},
+ {p:"País de América del Sur con capital Caracas",r:"VENEZUELA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Disciplina de meditación y posturas",r:"YOGA",t:"e"}],
+
+//── ROSCO 49 ─────────────────────────────────────────────
+[{p:"Nación insular del Pacífico con capital Tokio",r:"JAPON",t:"c"},
+ {p:"Mamífero marino más grande del mundo",r:"BALLENA",t:"e"},
+ {p:"Ave de plumaje blanco con cuello largo",r:"CISNE",t:"e"},
+ {p:"Número que sigue al nueve",r:"DIEZ",t:"e"},
+ {p:"País cuya capital es Quito, en Sudamérica",r:"ECUADOR",t:"e"},
+ {p:"Número que expresa una fracción",r:"FRACCION",t:"e"},
+ {p:"Capital de Argelia",r:"ARGEL",t:"c"},
+ {p:"Famoso compositor alemán de Fidelio",r:"BEETHOVEN",t:"c"},
+ {p:"País europeo con forma de bota y capital Roma",r:"ITALIA",t:"e"},
+ {p:"País de Oriente Medio cuya capital es Amán",r:"JORDANIA",t:"e"},
+ {p:"País de Asia Central con capital Ashgabat",r:"TURKMENISTAN",t:"c"},
+ {p:"País de África del Norte con capital Argel",r:"ARGELIA",t:"c"},
+ {p:"Capital de España, la ciudad más grande del país",r:"MADRID",t:"e"},
+ {p:"País de Asia del Sureste con capital Hanói",r:"VIETNAM",t:"c"},
+ {p:"Nostalgia o añoranza por algo o alguien del pasado",r:"AÑORANZA",t:"c"},
+ {p:"Instrumento de viento de madera con doble lengüeta",r:"OBOE",t:"e"},
+ {p:"Capital de Paraguay",r:"ASUNCION",t:"c"},
+ {p:"País de Europa del Sur cuya capital es Varsovia",r:"POLONIA",t:"e"},
+ {p:"Lengua indígena de los incas, hablada en los Andes",r:"QUECHUA",t:"e"},
+ {p:"Capital de Argentina",r:"BUENOS AIRES",t:"c"},
+ {p:"Estrella central del sistema solar",r:"SOL",t:"e"},
+ {p:"Capital de Japón, la ciudad más poblada del mundo",r:"TOKIO",t:"e"},
+ {p:"Continente formado por Europa y Asia",r:"EURASIA",t:"c"},
+ {p:"Capital de Austria, ciudad de Mozart",r:"VIENA",t:"e"},
+ {p:"Red mundial de información",r:"WEB",t:"e"},
+ {p:"Instrumento de percusión de láminas",r:"XILOFONO",t:"e"},
+ {p:"Capital de Camerún",r:"YAOUNDE",t:"e"}]
 ];
 
-// Expandir a 100 roscos ciclando los 10 base
-const ALL_ROSCOS=[];
-for(let i=0;i<100;i++) ALL_ROSCOS.push(BASE_ROSCOS[i%BASE_ROSCOS.length]);
 
-const LETTERS='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+// Runtime validator: auto-corrige t basándose en la respuesta real
+function validateAndFixRosco(rosco) {
+  const ABC='ABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
+  return rosco.map((q,i)=>{
+    const L=ABC[i];
+    const r=(q.r||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase().trim();
+    const starts=r.startsWith(L);
+    const contains=!starts&&r.includes(L);
+    return {p:q.p,r:q.r,t:starts?'e':contains?'c':q.t};
+  });
+}
+
+// 50 roscos únicos — sin repetición hasta completar el ciclo
+const ALL_ROSCOS=BASE_ROSCOS.map(validateAndFixRosco);
+
+const LETTERS='ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('');
 let TOTAL_TIME=240;
 let timerLocked=false;
 const COL={
@@ -480,128 +1661,253 @@ let S={name:'JUGADOR',letters:{},pending:[...LETTERS],curIdx:0,correct:0,wrong:0
 let L={W:0,H:0,sc:1,cx:0,cy:0,r:0,cr:0,innerR:0,bub:0,mobile:false};
 
 function layout(){
-  const vw=window.innerWidth,vh=window.innerHeight;
-  const mobile=vh>vw; L.mobile=mobile;
+  // Use visualViewport for true available space (excludes Safari chrome)
+  const vvp=window.visualViewport;
+  const vw=vvp?Math.round(vvp.width):window.innerWidth;
+  const vh=vvp?Math.round(vvp.height):window.innerHeight;
+  const mobile=vw<vh;
+  L.mobile=mobile;
+
   let W,H,sx,sy;
-  if(mobile){if(vw/vh<9/16){W=vw;H=W*16/9;}else{H=vh;W=H*9/16;}}
-  else{if(vw/vh>16/9){H=vh;W=H*16/9;}else{W=vw;H=W*9/16;}}
-  sx=(vw-W)/2;sy=(vh-H)/2;
+  if(mobile){
+    // Mobile: fill ALL available space — no forced 16:9 ratio
+    W=vw; H=vh; sx=0; sy=0;
+  } else {
+    if(vw/vh>16/9){H=vh;W=H*16/9;}else{W=vw;H=W*9/16;}
+    sx=(vw-W)/2; sy=(vh-H)/2;
+  }
   const st=document.getElementById('stage');
   Object.assign(st.style,{left:sx+'px',top:sy+'px',width:W+'px',height:H+'px'});
-  const sc=H/900;
-  const usableTop=H*0.10,usableBot=H*0.92;
-  const cx=W*0.5,cy=(usableTop+usableBot)/2;
-  const cr_want=mobile?H*0.041:H*0.047;
-  const r_min=(LETTERS.length*2*cr_want*1.22)/(2*Math.PI);
-  const r_max=Math.min(W*0.44,(usableBot-usableTop)*0.50);
-  const r=Math.min(r_max,Math.max(r_min,mobile?H*0.30:H*0.33));
-  const cr=Math.min(cr_want,(r*2*Math.PI)/(LETTERS.length*2*1.22));
-  const innerR=r-cr*2.6;
-  const bub=mobile?H*0.090:H*0.112;
-  Object.assign(L,{W,H,sc,cx,cy,r,cr,innerR,bub,mobile});
 
-  // BUBBLES: on mobile place them centered below the rosco, not flanking it
-  // to avoid overlapping letters. On desktop keep flanking.
+  // Scale factor relative to a 900px reference height
+  const sc=H/900;
+
+  // ── MOBILE LAYOUT ───────────────────────────────────────────────
+  // Zones from top to bottom:
+  //   [topBar]  top icons: ~8% H
+  //   [rosco]   circle + inner panel: fits in W, centered vertically in remaining space
+  //   [bubbles] puntaje + tiempo, centered, ~12% W each, below rosco
+  //   [mic]     floating bottom-right, 14% W
+
+  const iOS=/iPad|iPhone|iPod/.test(navigator.userAgent)&&!window.MSStream;
+
   if(mobile){
-    // Place below rosco, side by side, centered
-    const bubM=Math.min(H*0.080, W*0.18);
-    const gap=W*0.08;
-    const bubY=cy+r+cr*0.3;
-    setRound('score-bubble',bubM,cx-bubM-gap/2,bubY);
-    setRound('timer-bubble',bubM,cx+gap/2,bubY);
-    const bfsM=bubM*0.36;
+    const topBarH = H*0.10;          // space for top icons
+    const bubDiam = Math.min(W*0.20, H*0.105); // bubble size
+    const bubGap  = W*0.05;
+    const micSz   = Math.min(W*0.155, 70);    // floating mic
+    const micInset= Math.max(W*0.04, 12);
+    // Bottom zone: bubbles + a little margin
+    const botZone = bubDiam + H*0.015;
+    // Rosco zone: everything between topBar and bottom zone
+    const roscoZoneTop = topBarH;
+    const roscoZoneH   = H - topBarH - botZone;
+    const cx = W*0.5;
+    const cy = roscoZoneTop + roscoZoneH*0.5;
+
+    // Circle radius: fit inside rosco zone with margin
+    const cr_want = Math.min(W*0.068, roscoZoneH*0.068);
+    const r_max   = Math.min(W*0.42, roscoZoneH*0.46);
+    const r_min   = (LETTERS.length*2*cr_want*1.22)/(2*Math.PI);
+    const r       = Math.min(r_max, Math.max(r_min, roscoZoneH*0.42));
+    const cr      = Math.min(cr_want,(r*2*Math.PI)/(LETTERS.length*2*1.22));
+    const innerR  = r - cr*2.6;
+
+    Object.assign(L,{W,H,sc,cx,cy,r,cr,innerR,bub:bubDiam,mobile});
+
+    // Bubbles: centered below rosco letters, not overlapping
+    const bubY = cy + r + cr*0.55; // center of bubble below lowest letter
+    setRound('score-bubble', bubDiam, cx - bubDiam - bubGap/2, bubY);
+    setRound('timer-bubble', bubDiam, cx + bubGap/2,           bubY);
+    const bfsM = bubDiam*0.35;
     document.getElementById('sc-num').style.fontSize=bfsM+'px';
     document.getElementById('sc-timer').style.fontSize=bfsM+'px';
-    document.querySelectorAll('#score-bubble span,#timer-bubble span').forEach((s,i)=>{s.style.fontSize=(i%2===0?bfsM:bubM*0.13)+'px';});
-    Object.assign(L,{bub:bubM});
+    document.querySelectorAll('#score-bubble span,#timer-bubble span').forEach((s,i)=>{
+      s.style.fontSize=(i%2===0?bfsM:bubDiam*0.13)+'px';
+    });
+
+    // Floating mic: bottom-right corner
+    const mf=document.getElementById('mic-float');
+    mf.style.width=mf.style.height=micSz+'px';
+    mf.style.fontSize=micSz*0.44+'px';
+    mf.style.right=micInset+'px';
+    mf.style.bottom=micInset+'px';
+
+    // Top bar
+    const ibSize=Math.min(H*0.055, W*0.115, 46);
+    document.getElementById('top-bar').style.padding=`${Math.round(H*0.015)}px ${Math.round(W*0.04)}px 0`;
+    ['top-left','top-right'].forEach(id=>document.getElementById(id).style.gap='8px');
+    document.querySelectorAll('.icon-btn').forEach(b=>{
+      b.style.width=b.style.height=ibSize+'px';
+      b.style.fontSize=ibSize*0.42+'px';
+    });
+    if(iOS) document.getElementById('fs-btn').style.display='none';
+
+    // Q panel
+    const qd=innerR*1.84;
+    const qp=document.getElementById('q-panel');
+    Object.assign(qp.style,{width:qd+'px',height:qd+'px',left:(cx-qd/2)+'px',top:(cy-qd/2)+'px',
+      gap:Math.max(2,innerR*0.025)+'px',padding:`${innerR*0.06}px ${innerR*0.10}px`});
+    document.getElementById('q-tipo').style.fontSize=Math.min(innerR*0.16,13)+'px';
+    document.getElementById('q-big-letter').style.fontSize=Math.min(innerR*0.64,54)+'px';
+    document.getElementById('q-text').style.fontSize=Math.min(innerR*0.18,15)+'px';
+    document.getElementById('q-feedback').style.fontSize=Math.min(innerR*0.13,12)+'px';
+    document.getElementById('q-divider').style.margin='2px 0';
+    document.getElementById('ans-inp').style.fontSize=Math.min(innerR*0.145,14)+'px';
+    document.getElementById('ans-inp').style.padding=`${innerR*0.075}px ${innerR*0.12}px`;
+    const btnH=Math.min(innerR*0.28,28);
+    document.getElementById('action-row').style.marginTop='2px';
+    document.getElementById('action-row').style.borderRadius=btnH*0.5+'px';
+    document.getElementById('btn-ok').style.cssText+=`;font-size:${Math.min(innerR*0.14,13)}px;height:${btnH}px;`;
+    document.getElementById('btn-pasa').style.cssText+=`;font-size:${Math.min(innerR*0.14,13)}px;height:${btnH}px;`;
+
+    // Player name tag
+    const pnt=document.getElementById('player-name-tag');
+    const pntVis=pnt.style.display==='block';
+    const nameInsideY=cy+innerR*0.70;
+    pnt.style.cssText=`position:absolute;left:50%;transform:translateX(-50%);top:${nameInsideY}px;font-size:${Math.min(innerR*0.17,13)}px;padding:3px 14px;background:rgba(0,0,40,.82);border:1.5px solid rgba(100,160,255,.45);border-radius:30px;color:#ffcc44;font-weight:900;letter-spacing:2px;text-transform:uppercase;pointer-events:none;z-index:25;white-space:nowrap;display:${pntVis?'block':'none'};`;
+
+    // Leaderboard
+    const lbW=W*0.30;
+    document.getElementById('lb-panel').style.width=lbW+'px';
+    document.getElementById('lb-panel').style.padding='5px 7px';
+    document.getElementById('lb-title-el').style.fontSize='9px';
+
+    // Timer config popup
+    const tcVis=document.getElementById('timer-config').style.display==='flex';
+    const tcW=Math.min(W*0.82, 320);
+    const tc=document.getElementById('timer-config');
+    tc.style.cssText=`position:absolute;z-index:55;width:${tcW}px;left:${(W-tcW)/2}px;top:${H*0.25}px;background:rgba(0,5,40,.97);border:2px solid rgba(100,160,255,.5);border-radius:16px;padding:20px 22px;display:${tcVis?'flex':'none'};flex-direction:column;align-items:center;gap:12px;pointer-events:all;`;
+    document.getElementById('tc-title').style.fontSize='18px';
+    document.getElementById('tc-desc').style.fontSize='12px';
+    document.getElementById('timer-val').style.fontSize='28px';
+    document.getElementById('tc-ok').style.cssText+=`;font-size:15px;padding:9px 28px;`;
+
+    // Pause/confirm
+    document.getElementById('pause-msg').style.fontSize='20px';
+    document.getElementById('btn-resume').style.cssText+=`;font-size:16px;padding:10px 32px;`;
+    document.getElementById('confirm-msg').style.fontSize='16px';
+    document.getElementById('confirm-sub').style.fontSize='12px';
+    document.querySelectorAll('.btn-yes,.btn-no').forEach(b=>{b.style.fontSize='13px';b.style.padding='8px 18px';});
+
+    // Start screen
+    document.getElementById('start-screen').style.gap='12px';
+    document.getElementById('ss-eye').style.fontSize='11px';
+    document.getElementById('ss-ttl').style.fontSize='32px';
+    const ni=document.getElementById('name-inp');
+    ni.style.fontSize='16px';ni.style.padding='10px 24px';ni.style.width=W*0.74+'px';
+    document.getElementById('play-btn').style.cssText+=`;font-size:16px;padding:12px 36px;margin-top:14px;`;
+    document.getElementById('timer-start-lbl').style.fontSize='13px';
+    document.getElementById('timer-start-btn').style.fontSize='14px';
+    document.getElementById('timer-start-btn').style.padding='7px 20px';
+    document.getElementById('timer-start-row').style.gap='8px';
+
+    // End screen
+    document.getElementById('end-screen').style.gap='6px';
+    document.getElementById('end-num').style.fontSize='56px';
+    document.getElementById('end-msg').style.fontSize='16px';
+    document.getElementById('end-sub').style.fontSize='11px';
+    document.getElementById('end-name').style.fontSize='12px';
+    document.getElementById('end-lb-title').style.fontSize='10px';
+    document.getElementById('end-lb-title').style.marginBottom='5px';
+    document.getElementById('end-lb-wrap').style.cssText=`max-width:${W*0.88}px;width:100%;`;
+    document.getElementById('again-btn').style.cssText+=`;font-size:14px;padding:10px 26px;margin-top:16px;`;
+    document.getElementById('timer-start-val').textContent=TOTAL_TIME+' SEG';
+
   } else {
+  // ── DESKTOP LAYOUT ──────────────────────────────────────────────
+    const usableTop=H*0.10, usableBot=H*0.92;
+    const cx=W*0.5, cy=(usableTop+usableBot)/2;
+    const cr_want=H*0.047;
+    const r_min=(LETTERS.length*2*cr_want*1.22)/(2*Math.PI);
+    const r_max=Math.min(W*0.44,(usableBot-usableTop)*0.50);
+    const r=Math.min(r_max,Math.max(r_min,H*0.33));
+    const cr=Math.min(cr_want,(r*2*Math.PI)/(LETTERS.length*2*1.22));
+    const innerR=r-cr*2.6;
+    const bub=H*0.112;
+    Object.assign(L,{W,H,sc,cx,cy,r,cr,innerR,bub,mobile});
+
     setRound('score-bubble',bub,W*0.016,cy-bub/2);
     setRound('timer-bubble',bub,W-W*0.016-bub,cy-bub/2);
     const bfs=bub*0.36;
     document.getElementById('sc-num').style.fontSize=bfs+'px';
     document.getElementById('sc-timer').style.fontSize=bfs+'px';
     document.querySelectorAll('#score-bubble span,#timer-bubble span').forEach((s,i)=>{s.style.fontSize=(i%2===0?bfs:bub*0.13)+'px';});
+
+    // Floating mic: hidden on desktop (spacebar is used)
+    const mf=document.getElementById('mic-float');
+    mf.style.width=mf.style.height=sc*68+'px';
+    mf.style.fontSize=sc*28+'px';
+    mf.style.right=sc*18+'px';
+    mf.style.bottom=sc*18+'px';
+
+    const inset=Math.round(36*sc), ibSize=H*0.060;
+    document.getElementById('top-bar').style.padding=`${inset}px ${inset}px 0 ${inset}px`;
+    ['top-left','top-right'].forEach(id=>document.getElementById(id).style.gap=sc*9+'px');
+    document.querySelectorAll('.icon-btn').forEach(b=>{b.style.width=b.style.height=ibSize+'px';b.style.fontSize=ibSize*0.42+'px';});
+    if(iOS) document.getElementById('fs-btn').style.display='none';
+    else document.getElementById('fs-btn').style.display='flex';
+
+    const qd=innerR*1.84;
+    const qp=document.getElementById('q-panel');
+    Object.assign(qp.style,{width:qd+'px',height:qd+'px',left:(cx-qd/2)+'px',top:(cy-qd/2)+'px',gap:sc*2.5+'px',padding:`${innerR*0.07}px ${innerR*0.11}px`});
+    document.getElementById('q-tipo').style.fontSize=Math.min(innerR*0.155,sc*13)+'px';
+    document.getElementById('q-big-letter').style.fontSize=Math.min(innerR*0.62,sc*60)+'px';
+    document.getElementById('q-text').style.fontSize=Math.min(innerR*0.175,sc*16.5)+'px';
+    document.getElementById('q-feedback').style.fontSize=sc*12+'px';
+    document.getElementById('q-divider').style.margin=`${sc*2}px 0`;
+    document.getElementById('ans-inp').style.fontSize=sc*14+'px';
+    document.getElementById('ans-inp').style.padding=`${sc*7}px ${sc*11}px`;
+    const btnH=Math.min(innerR*0.26,sc*30);
+    document.getElementById('action-row').style.marginTop=sc*3+'px';
+    document.getElementById('action-row').style.borderRadius=btnH*0.5+'px';
+    document.getElementById('btn-ok').style.cssText+=`;font-size:${sc*13.5}px;height:${btnH}px;`;
+    document.getElementById('btn-pasa').style.cssText+=`;font-size:${sc*13.5}px;height:${btnH}px;`;
+
+    const pnt=document.getElementById('player-name-tag');
+    const pntVis=pnt.style.display==='block';
+    const nameInsideY=cy+innerR*0.72;
+    pnt.style.cssText=`position:absolute;left:50%;transform:translateX(-50%);top:${nameInsideY}px;font-size:${Math.min(innerR*0.17,sc*15)}px;padding:${sc*4}px ${sc*16}px;background:rgba(0,0,40,.82);border:1.5px solid rgba(100,160,255,.45);border-radius:30px;color:#ffcc44;font-weight:900;letter-spacing:2px;text-transform:uppercase;pointer-events:none;z-index:25;white-space:nowrap;display:${pntVis?'block':'none'};`;
+
+    const lbW=W*0.20;
+    document.getElementById('lb-panel').style.width=lbW+'px';
+    document.getElementById('lb-panel').style.padding=`${sc*5}px ${sc*7}px`;
+    document.getElementById('lb-title-el').style.fontSize=sc*9+'px';
+
+    const tcVis=document.getElementById('timer-config').style.display==='flex';
+    const tcW=Math.min(W*0.50,300*sc);
+    const tc=document.getElementById('timer-config');
+    tc.style.cssText=`position:absolute;z-index:55;width:${tcW}px;left:${(W-tcW)/2}px;top:${H*0.28}px;background:rgba(0,5,40,.97);border:2px solid rgba(100,160,255,.5);border-radius:${sc*16}px;padding:${sc*20}px ${sc*22}px;display:${tcVis?'flex':'none'};flex-direction:column;align-items:center;gap:${sc*12}px;pointer-events:all;`;
+    document.getElementById('tc-title').style.fontSize=sc*18+'px';
+    document.getElementById('tc-desc').style.fontSize=sc*12+'px';
+    document.getElementById('timer-val').style.fontSize=sc*28+'px';
+    document.getElementById('tc-ok').style.cssText+=`;font-size:${sc*15}px;padding:${sc*9}px ${sc*28}px;`;
+    document.getElementById('pause-msg').style.fontSize=sc*21+'px';
+    document.getElementById('btn-resume').style.cssText+=`;font-size:${sc*17}px;padding:${sc*11}px ${sc*34}px;`;
+    document.getElementById('confirm-msg').style.fontSize=sc*17+'px';
+    document.getElementById('confirm-sub').style.fontSize=sc*13+'px';
+    document.querySelectorAll('.btn-yes,.btn-no').forEach(b=>{b.style.fontSize=sc*14+'px';b.style.padding=`${sc*9}px ${sc*20}px`;});
+    document.getElementById('start-screen').style.gap=sc*14+'px';
+    document.getElementById('ss-eye').style.fontSize=sc*12+'px';
+    document.getElementById('ss-ttl').style.fontSize=sc*44+'px';
+    const ni=document.getElementById('name-inp');
+    ni.style.fontSize=sc*17+'px';ni.style.padding=`${sc*10}px ${sc*26}px`;ni.style.width=W*0.28+'px';
+    document.getElementById('play-btn').style.cssText+=`;font-size:${sc*17}px;padding:${sc*12}px ${sc*40}px;margin-top:${sc*18}px;`;
+    document.getElementById('timer-start-lbl').style.fontSize=sc*14+'px';
+    document.getElementById('timer-start-btn').style.fontSize=sc*15+'px';
+    document.getElementById('timer-start-btn').style.padding=`${sc*8}px ${sc*22}px`;
+    document.getElementById('timer-start-row').style.gap=sc*10+'px';
+    document.getElementById('timer-start-val').textContent=TOTAL_TIME+' SEG';
+    document.getElementById('end-screen').style.gap=sc*7+'px';
+    document.getElementById('end-num').style.fontSize=sc*64+'px';
+    document.getElementById('end-msg').style.fontSize=sc*18+'px';
+    document.getElementById('end-sub').style.fontSize=sc*12+'px';
+    document.getElementById('end-name').style.fontSize=sc*14+'px';
+    document.getElementById('end-lb-title').style.fontSize=sc*11+'px';
+    document.getElementById('end-lb-title').style.marginBottom=sc*8+'px';
+    document.getElementById('end-lb-wrap').style.cssText=`max-width:${Math.min(W*0.60,440)}px;width:100%;`;
+    document.getElementById('again-btn').style.cssText+=`;font-size:${sc*15}px;padding:${sc*10}px ${sc*28}px;margin-top:${sc*22}px;`;
   }
-
-  const inset=Math.round(36*sc),ibSize=mobile?H*0.052:H*0.060;
-  document.getElementById('top-bar').style.padding=`${inset}px ${inset}px 0 ${inset}px`;
-  ['top-left','top-right'].forEach(id=>document.getElementById(id).style.gap=sc*9+'px');
-  document.querySelectorAll('.icon-btn').forEach(b=>{b.style.width=b.style.height=ibSize+'px';b.style.fontSize=ibSize*0.42+'px';});
-
-  // On iOS, fullscreen API not supported — show/hide fs button accordingly
-  const fsBtn=document.getElementById('fs-btn');
-  const iOS=/iPad|iPhone|iPod/.test(navigator.userAgent)&&!window.MSStream;
-  if(iOS){fsBtn.style.display='none';}else{fsBtn.style.display='flex';}
-
-  const qd=innerR*1.84;
-  const qp=document.getElementById('q-panel');
-  Object.assign(qp.style,{width:qd+'px',height:qd+'px',left:(cx-qd/2)+'px',top:(cy-qd/2)+'px',gap:sc*2.5+'px',padding:`${innerR*0.07}px ${innerR*0.11}px`});
-  document.getElementById('q-tipo').style.fontSize=Math.min(innerR*0.155,sc*13)+'px';
-  document.getElementById('q-big-letter').style.fontSize=Math.min(innerR*0.62,sc*60)+'px';
-  document.getElementById('q-text').style.fontSize=Math.min(innerR*0.175,sc*16.5)+'px';
-  document.getElementById('q-feedback').style.fontSize=sc*12+'px';
-  document.getElementById('q-divider').style.margin=`${sc*2}px 0`;
-  document.getElementById('ans-inp').style.fontSize=sc*14+'px';
-  document.getElementById('ans-inp').style.padding=`${sc*7}px ${sc*11}px`;
-
-  // Floating mic button — bottom right, thumb zone
-  const micFloatSize=Math.min(W*0.16,H*0.09,sc*68);
-  const micInset=Math.round(sc*18);
-  const mf=document.getElementById('mic-float');
-  mf.style.width=mf.style.height=micFloatSize+'px';
-  mf.style.fontSize=micFloatSize*0.42+'px';
-  mf.style.right=micInset+'px';
-  mf.style.bottom=micInset+'px';
-
-  const btnH=Math.min(innerR*0.26,sc*30);
-  document.getElementById('action-row').style.marginTop=sc*3+'px';
-  document.getElementById('action-row').style.borderRadius=btnH*0.5+'px';
-  document.getElementById('btn-ok').style.cssText+=`;font-size:${sc*13.5}px;height:${btnH}px;`;
-  document.getElementById('btn-pasa').style.cssText+=`;font-size:${sc*13.5}px;height:${btnH}px;`;
-  // Player name — preserve visibility on fullscreen toggle
-  const pnt=document.getElementById('player-name-tag');
-  const pntVis=pnt.style.display==='block';
-  const nameInsideY=cy+innerR*0.72;
-  pnt.style.cssText=`position:absolute;left:50%;transform:translateX(-50%);top:${nameInsideY}px;font-size:${Math.min(innerR*0.17,sc*15)}px;padding:${sc*4}px ${sc*16}px;background:rgba(0,0,40,.82);border:1.5px solid rgba(100,160,255,.45);border-radius:30px;color:#ffcc44;font-weight:900;letter-spacing:2px;text-transform:uppercase;pointer-events:none;z-index:25;white-space:nowrap;display:${pntVis?'block':'none'};`;
-  const lbW=mobile?W*0.28:W*0.20;
-  const lp=document.getElementById('lb-panel');
-  lp.style.width=lbW+'px';lp.style.padding=`${sc*5}px ${sc*7}px`;
-  document.getElementById('lb-title-el').style.fontSize=sc*9+'px';
-  const tcVis=document.getElementById('timer-config').style.display==='flex';
-  const tcW=Math.min(W*0.50,300*sc);
-  const tc=document.getElementById('timer-config');
-  tc.style.cssText=`position:absolute;z-index:55;width:${tcW}px;left:${(W-tcW)/2}px;top:${H*0.28}px;background:rgba(0,5,40,.97);border:2px solid rgba(100,160,255,.5);border-radius:${sc*16}px;padding:${sc*20}px ${sc*22}px;display:${tcVis?'flex':'none'};flex-direction:column;align-items:center;gap:${sc*12}px;pointer-events:all;`;
-  document.getElementById('tc-title').style.fontSize=sc*18+'px';
-  document.getElementById('tc-desc').style.fontSize=sc*12+'px';
-  document.getElementById('timer-val').style.fontSize=sc*28+'px';
-  document.getElementById('tc-ok').style.cssText+=`;font-size:${sc*15}px;padding:${sc*9}px ${sc*28}px;`;
-  document.getElementById('pause-msg').style.fontSize=sc*21+'px';
-  document.getElementById('btn-resume').style.cssText+=`;font-size:${sc*17}px;padding:${sc*11}px ${sc*34}px;`;
-  document.getElementById('confirm-msg').style.fontSize=sc*17+'px';
-  document.getElementById('confirm-sub').style.fontSize=sc*13+'px';
-  document.querySelectorAll('.btn-yes,.btn-no').forEach(b=>{b.style.fontSize=sc*14+'px';b.style.padding=`${sc*9}px ${sc*20}px`;});
-  document.getElementById('start-screen').style.gap=sc*14+'px';
-  document.getElementById('ss-eye').style.fontSize=sc*12+'px';
-  document.getElementById('ss-ttl').style.fontSize=sc*(mobile?34:44)+'px';
-  const ni=document.getElementById('name-inp');
-  ni.style.fontSize=sc*17+'px';ni.style.padding=`${sc*10}px ${sc*26}px`;ni.style.width=(mobile?W*0.72:W*0.28)+'px';
-  document.getElementById('play-btn').style.cssText+=`;font-size:${sc*17}px;padding:${sc*12}px ${sc*40}px;margin-top:${sc*18}px;`;
-  document.getElementById('timer-start-lbl').style.fontSize=sc*14+'px';
-  document.getElementById('timer-start-btn').style.fontSize=sc*15+'px';
-  document.getElementById('timer-start-btn').style.padding=`${sc*8}px ${sc*22}px`;
-  document.getElementById('timer-start-row').style.gap=sc*10+'px';
-  document.getElementById('timer-start-val').textContent=TOTAL_TIME+' SEG';
-  document.getElementById('end-screen').style.gap=sc*7+'px';
-  document.getElementById('end-num').style.fontSize=sc*64+'px';
-  document.getElementById('end-msg').style.fontSize=sc*18+'px';
-  document.getElementById('end-sub').style.fontSize=sc*12+'px';
-  document.getElementById('end-name').style.fontSize=sc*14+'px';
-  document.getElementById('end-lb-title').style.fontSize=sc*11+'px';
-  document.getElementById('end-lb-title').style.marginBottom=sc*8+'px';
-  document.getElementById('end-lb-wrap').style.cssText=`max-width:${Math.min(W*0.60,440)}px;width:100%;`;
-  // ~1cm gap between last player and button
-  const ab=document.getElementById('again-btn');
-  ab.style.fontSize=sc*15+'px';ab.style.padding=`${sc*10}px ${sc*28}px`;ab.style.marginTop=sc*22+'px';
   drawRosco();
 }
 
@@ -891,8 +2197,8 @@ document.getElementById('name-inp').addEventListener('keydown',e=>{if(e.key==='E
 // We lock the stage to the initial visual viewport size
 if(window.visualViewport){
   window.visualViewport.addEventListener('resize',()=>{
-    // Do NOT call layout() — keep stage fixed. Just re-draw rosco if needed.
-    // The stage is position:fixed so it stays in place.
+    // Only re-layout if width changed (real orientation change), not just height (keyboard)
+    if(Math.abs(window.visualViewport.width-L.W)>10) layout();
   });
 }
 window.addEventListener('resize',()=>{
