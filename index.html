@@ -97,8 +97,24 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
 #end-sub{color:#7799bb;}
 #end-lb-wrap{width:100%;}
 #end-lb-title{color:#88ccff;font-weight:800;letter-spacing:2px;text-align:center;}
-#end-lb-list{display:flex;flex-direction:column;align-items:stretch;width:100%;}
-</style>
+/* ── Instructions overlay ─────────────────────────────── */
+#instructions-overlay{position:absolute;inset:0;z-index:70;background:rgba(0,2,18,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:all;padding:4%;}
+#instructions-overlay.hidden{display:none;}
+#instr-title{font-weight:900;color:#fff;letter-spacing:3px;text-shadow:0 0 24px rgba(80,160,255,.5);text-align:center;}
+#instr-subtitle{color:#7799bb;font-weight:700;letter-spacing:1px;text-align:center;}
+#instr-grid{display:grid;grid-template-columns:1fr 1fr;width:100%;max-width:820px;}
+.instr-card{background:rgba(255,255,255,.045);border:1px solid rgba(100,160,255,.18);border-radius:14px;display:flex;align-items:flex-start;gap:10px;}
+.instr-icon{flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(30,80,220,.25);border:2px solid rgba(80,150,255,.35);}
+.instr-text-wrap{display:flex;flex-direction:column;gap:3px;}
+.instr-label{font-weight:900;color:#88ccff;letter-spacing:.5px;text-transform:uppercase;}
+.instr-desc{color:#ccddf0;font-weight:700;line-height:1.45;}
+.instr-desc kbd{background:rgba(80,150,255,.25);border:1px solid rgba(100,160,255,.5);border-radius:5px;padding:1px 6px;font-family:'Nunito',sans-serif;color:#aaddff;font-size:.9em;}
+#btn-instr-ok{background:linear-gradient(135deg,#1144cc,#44aaff);color:#fff;border-radius:40px;border:none;font-family:'Nunito',sans-serif;font-weight:900;letter-spacing:1px;cursor:pointer;box-shadow:0 6px 28px rgba(68,170,255,.45);transition:opacity .15s,transform .1s;}
+#btn-instr-ok:hover{opacity:.9;}
+#btn-instr-ok:active{transform:scale(.96);}
+/* Help button — always visible top-right during game */
+#btn-help{position:absolute;z-index:31;border-radius:50%;border:none;background:rgba(30,60,140,.7);color:#88ccff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:900;font-family:'Nunito',sans-serif;box-shadow:0 2px 10px rgba(20,60,180,.4);transition:background .15s;}
+#btn-help:hover{background:rgba(50,100,220,.8);}
 </head>
 <body>
 <div id="stage">
@@ -117,7 +133,59 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
       <div id="top-right">
         <button class="icon-btn ibtn-cam clickable" id="cam-btn" onclick="toggleCam()">&#128247;</button>
         <button class="icon-btn ibtn-fs  clickable" id="fs-btn"  onclick="toggleFS()">&#9974;</button>
+        <button id="btn-help" onclick="showInstructions()" title="Ver instrucciones">?</button>
       </div>
+    </div>
+
+    <!-- Instructions overlay — shown once per session -->
+    <div id="instructions-overlay">
+      <div id="instr-title">EL ROSCO</div>
+      <div id="instr-subtitle">¿CÓMO SE JUEGA?</div>
+      <div id="instr-grid">
+        <div class="instr-card">
+          <div class="instr-icon">&#127908;</div>
+          <div class="instr-text-wrap">
+            <span class="instr-label">Micrófono</span>
+            <span class="instr-desc">Desktop: mantené <kbd>Ctrl</kbd> para hablar, soltá para confirmar. Mobile: mantenés presionado el botón 🎤.</span>
+          </div>
+        </div>
+        <div class="instr-card">
+          <div class="instr-icon">&#128247;</div>
+          <div class="instr-text-wrap">
+            <span class="instr-label">Cámara</span>
+            <span class="instr-desc">Activá la cámara frontal con el ícono 📷 arriba a la derecha para que todos te vean jugar.</span>
+          </div>
+        </div>
+        <div class="instr-card">
+          <div class="instr-icon">&#9998;</div>
+          <div class="instr-text-wrap">
+            <span class="instr-label">Respuestas</span>
+            <span class="instr-desc">Una sola palabra o nombre. Sin tildes, el juego las ignora. Presioná <kbd>Enter</kbd> o el botón OK para confirmar.</span>
+          </div>
+        </div>
+        <div class="instr-card">
+          <div class="instr-icon">&#8629;</div>
+          <div class="instr-text-wrap">
+            <span class="instr-label">Pasapalabra</span>
+            <span class="instr-desc">Si no sabés la respuesta, pasá y volvé después. Las letras en amarillo son las que pasaste.</span>
+          </div>
+        </div>
+        <div class="instr-card">
+          <div class="instr-icon">&#9201;</div>
+          <div class="instr-text-wrap">
+            <span class="instr-label">Tiempo</span>
+            <span class="instr-desc">Hay tiempo limitado. El primer jugador puede configurarlo entre 2 y 5 minutos antes de empezar.</span>
+          </div>
+        </div>
+        <div class="instr-card">
+          <div class="instr-icon">&#127942;</div>
+          <div class="instr-text-wrap">
+            <span class="instr-label">Competencia</span>
+            <span class="instr-desc">Cada jugador recibe un rosco diferente. Gana quien más respuestas correctas acumule en el tiempo.</span>
+          </div>
+        </div>
+      </div>
+      <button id="btn-instr-ok" onclick="hideInstructions()">&#128640; ¡ENTENDIDO, A JUGAR!</button>
     </div>
     <div id="q-panel" style="display:none">
       <div id="q-tipo">EMPIEZA POR A</div>
@@ -670,6 +738,9 @@ function layout(){
     document.getElementById('again-btn').style.cssText+=`;font-size:14px;padding:10px 26px;margin-top:16px;`;
     document.getElementById('timer-start-val').textContent=TOTAL_TIME+' SEG';
 
+    // Instructions overlay sizing
+    layoutInstructions(W,H,sc,mobile);
+
   } else {
   // ── DESKTOP LAYOUT ──────────────────────────────────────────────
     const usableTop=H*0.10, usableBot=H*0.92;
@@ -777,8 +848,55 @@ function layout(){
     document.getElementById('end-lb-title').style.marginBottom=sc*8+'px';
     document.getElementById('end-lb-wrap').style.cssText=`max-width:${Math.min(W*0.60,440)}px;width:100%;`;
     document.getElementById('again-btn').style.cssText+=`;font-size:${sc*15}px;padding:${sc*10}px ${sc*28}px;margin-top:${sc*22}px;`;
+
+    // Instructions overlay sizing
+    layoutInstructions(W,H,sc,mobile);
   }
   drawRosco();
+}
+
+function layoutInstructions(W,H,sc,mobile){
+  const ov=document.getElementById('instructions-overlay');
+  ov.style.padding=mobile?`${H*0.04}px ${W*0.05}px`:`${H*0.05}px ${W*0.06}px`;
+  ov.style.gap=sc*12+'px';
+
+  document.getElementById('instr-title').style.fontSize=sc*(mobile?28:38)+'px';
+  document.getElementById('instr-subtitle').style.fontSize=sc*(mobile?11:13)+'px';
+  document.getElementById('instr-subtitle').style.marginTop=sc*2+'px';
+
+  const grid=document.getElementById('instr-grid');
+  grid.style.gridTemplateColumns=mobile?'1fr':'1fr 1fr';
+  grid.style.gap=sc*(mobile?8:10)+'px';
+  grid.style.marginTop=sc*6+'px';
+  grid.style.width='100%';
+  grid.style.maxWidth=mobile?'100%':'800px';
+
+  const iconSz=sc*(mobile?28:34);
+  const cardPad=sc*(mobile?8:11);
+  const cardGap=sc*(mobile?7:10);
+  const labelSz=sc*(mobile?9:10);
+  const descSz=sc*(mobile?9.5:11);
+  document.querySelectorAll('.instr-card').forEach(c=>{
+    c.style.padding=cardPad+'px';c.style.gap=cardGap+'px';c.style.borderRadius=sc*10+'px';
+  });
+  document.querySelectorAll('.instr-icon').forEach(ic=>{
+    ic.style.width=ic.style.height=iconSz+'px';ic.style.fontSize=iconSz*0.52+'px';ic.style.minWidth=iconSz+'px';
+  });
+  document.querySelectorAll('.instr-label').forEach(l=>l.style.fontSize=labelSz+'px');
+  document.querySelectorAll('.instr-desc').forEach(d=>{d.style.fontSize=descSz+'px';});
+  document.querySelectorAll('.instr-desc kbd').forEach(k=>k.style.fontSize=descSz*0.9+'px');
+
+  const okBtn=document.getElementById('btn-instr-ok');
+  okBtn.style.fontSize=sc*(mobile?14:16)+'px';
+  okBtn.style.padding=`${sc*11}px ${sc*36}px`;
+  okBtn.style.marginTop=sc*4+'px';
+
+  // Help button sizing (top-right)
+  const hb=document.getElementById('btn-help');
+  const ibSz=mobile?H*0.052:H*0.060;
+  hb.style.width=hb.style.height=ibSz+'px';
+  hb.style.fontSize=ibSz*0.46+'px';
+  // Position it right after fs-btn in top-right — handled by flex gap
 }
 
 function setRound(id,size,left,top){const el=document.getElementById(id);el.style.width=el.style.height=size+'px';el.style.left=left+'px';el.style.top=top+'px';}
@@ -826,6 +944,15 @@ async function startCam(){
   catch(e){btn.innerHTML='&#128683;';}
 }
 function stopCam(){if(camStream)camStream.getTracks().forEach(t=>t.stop());camStream=null;document.getElementById('vid').style.display='none';const btn=document.getElementById('cam-btn');btn.className='icon-btn ibtn-cam clickable';btn.innerHTML='&#128247;';camOn=false;}
+function showInstructions(){document.getElementById('instructions-overlay').classList.remove('hidden');}
+function hideInstructions(){
+  document.getElementById('instructions-overlay').classList.add('hidden');
+  // Mark as seen so it doesn't show again this session
+  sessionStorage.setItem('instrSeen','1');
+}
+// Show once per session
+if(!sessionStorage.getItem('instrSeen')) showInstructions();
+
 function toggleFS(){
   const inFS=!!(document.fullscreenElement||document.webkitFullscreenElement);
   if(!inFS){const el=document.documentElement;(el.requestFullscreen||el.webkitRequestFullscreen||function(){}).call(el);}
