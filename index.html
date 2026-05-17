@@ -34,6 +34,9 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
 .ibtn-wrong{background:radial-gradient(circle at 38% 32%,#ff6666,#cc1818 60%,#960000);}
 .ibtn-right{background:radial-gradient(circle at 38% 32%,#66ee88,#1aaa44 60%,#008830);}
 .ibtn-reset{background:radial-gradient(circle at 38% 32%,#ffe066,#cc8800 60%,#996400);}
+.ibtn-mic-toggle{background:radial-gradient(circle at 38% 32%,#556688,#223355 60%,#111f33);box-shadow:0 3px 14px rgba(20,40,80,.5),inset 0 2px 0 rgba(255,255,255,.2);font-size:10px!important;letter-spacing:.5px;}
+.ibtn-mic-toggle.mic-on{background:radial-gradient(circle at 38% 32%,#ff8888,#cc2222 60%,#880000);box-shadow:0 3px 14px rgba(200,20,20,.6),inset 0 2px 0 rgba(255,255,255,.3);animation:micpulse .8s infinite alternate;}
+.ibtn-mic-toggle.mic-listening{background:radial-gradient(circle at 38% 32%,#ff4444,#bb0000 60%,#770000);box-shadow:0 0 18px rgba(255,50,50,.9),inset 0 2px 0 rgba(255,255,255,.3);}
 .ibtn-cam{background:radial-gradient(circle at 38% 32%,#aabbdd,#556688 60%,#334455);box-shadow:0 3px 14px rgba(60,80,120,.5);}
 .ibtn-cam.on{background:radial-gradient(circle at 38% 32%,#55eebb,#118855 60%,#006633);}
 .ibtn-fs{background:radial-gradient(circle at 38% 32%,#aabbdd,#556688 60%,#334455);}
@@ -112,7 +115,7 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
         <button class="icon-btn ibtn-pause clickable" id="btn-pause" onclick="togglePause()">&#9646;&#9646;</button>
         <div class="icon-btn ibtn-wrong deco">&#x2715;</div>
         <div class="icon-btn ibtn-right deco">&#x2713;</div>
-        <div class="icon-btn ibtn-reset deco">&#x21BB;</div>
+        <button class="icon-btn ibtn-mic-toggle clickable" id="btn-mic-toggle" onclick="toggleMicMode()" title="Activar/desactivar micrófono (o Barra espaciadora)">MIC</button>
       </div>
       <div id="top-right">
         <button class="icon-btn ibtn-cam clickable" id="cam-btn" onclick="toggleCam()">&#128247;</button>
@@ -873,28 +876,72 @@ function startTimer(){
   },1000);
 }
 
+let micModeActive=false; // true = mic mode ON (desktop toggle)
+
+function toggleMicMode(){
+  // Desktop MIC button: toggles mic mode on/off
+  if(!S.active){return;}
+  if(micModeActive){
+    micModeActive=false;
+    stopMicNow();
+    updateMicToggleBtn();
+  } else {
+    micModeActive=true;
+    updateMicToggleBtn();
+    startMicNow();
+  }
+}
+function updateMicToggleBtn(){
+  const btn=document.getElementById('btn-mic-toggle');
+  if(!btn)return;
+  if(micModeActive&&micOn){
+    btn.className='icon-btn ibtn-mic-toggle clickable mic-listening';
+    btn.textContent='MIC ON';
+  } else if(micModeActive){
+    btn.className='icon-btn ibtn-mic-toggle clickable mic-on';
+    btn.textContent='MIC ON';
+  } else {
+    btn.className='icon-btn ibtn-mic-toggle clickable';
+    btn.textContent='MIC';
+  }
+}
+
 function initRec(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return null;
   const rec=new SR();rec.lang='es-AR';rec.continuous=false;rec.interimResults=false;rec.maxAlternatives=1;
   rec.onresult=e=>{
-    // Fill input but do NOT auto-submit — user reviews and presses OK or Enter
     const word=e.results[0][0].transcript.trim().toUpperCase().replace(/\s+/g,'');
     document.getElementById('ans-inp').value=word;
     document.getElementById('ans-inp').focus();
     stopMicNow();
+    // If still in mic mode, restart listening automatically
+    if(micModeActive&&S.active&&!paused) setTimeout(()=>startMicNow(),300);
   };
-  rec.onend=()=>{if(micOn)stopMicNow();};rec.onerror=()=>stopMicNow();
+  rec.onend=()=>{
+    if(micOn) stopMicNow();
+    // If mic mode still on and game active, restart
+    if(micModeActive&&S.active&&!paused) setTimeout(()=>startMicNow(),300);
+  };
+  rec.onerror=e=>{
+    stopMicNow();
+    if(e.error!=='aborted') micModeActive=false;
+    updateMicToggleBtn();
+  };
   return rec;
 }
 function setMicUI(on){
   const mf=document.getElementById('mic-float');
   const mb=document.getElementById('mic-btn');
-  const listeningClass=S.active?'active-game listening':'listening';
-  const idleClass=S.active?'active-game':'';
-  mf.className=on?listeningClass:idleClass;
-  mf.innerHTML=on?'&#128308;':'&#127908;';
-  mb.className=on?'listening':'';
-  mb.innerHTML=on?'&#128308;':'&#127908;';
+  if(on){
+    mf.className=S.active?'active-game listening':'listening';
+    mf.innerHTML='&#128308;';
+    mb.className='listening';mb.innerHTML='&#128308;';
+  }else{
+    mf.className=S.active?'active-game':'';
+    mf.innerHTML='&#127908;';
+    mb.className='';mb.innerHTML='&#127908;';
+  }
+  updateMicToggleBtn();
 }
 async function ensureMicPermission(){
   if(micPermitted)return true;
@@ -906,43 +953,43 @@ async function startMicNow(){
   if(!S.active||paused)return;
   if(!await ensureMicPermission())return;
   if(!recognition)recognition=initRec();
-  if(!recognition){alert('Reconocimiento de voz no disponible en este navegador.\nUsá Chrome (Android) o Safari (iOS).');return;}
+  if(!recognition){alert('Reconocimiento de voz no disponible.\nUsá Chrome (Android) o Safari (iOS).');return;}
   if(micOn)return;
   try{recognition.start();}catch(e){return;}
   micOn=true;setMicUI(true);
 }
-function stopMicNow(){if(!micOn)return;if(recognition)try{recognition.stop();}catch(e){}micOn=false;setMicUI(false);}
+function stopMicNow(){
+  if(!micOn)return;
+  if(recognition)try{recognition.stop();}catch(e){}
+  micOn=false;setMicUI(false);
+}
 
-// Floating mic (main, thumb-reachable)
-// FIX 4 MOBILE: push-to-talk only — touchstart starts, touchend stops (hold to record)
+// ── Mobile: push-to-hold on floating button ──────────────────
 const micFloatEl=document.getElementById('mic-float');
 micFloatEl.addEventListener('mousedown',e=>{e.preventDefault();startMicNow();});
-micFloatEl.addEventListener('mouseup',  e=>{e.preventDefault();stopMicNow();});
-micFloatEl.addEventListener('mouseleave',e=>{if(micOn)stopMicNow();});
+micFloatEl.addEventListener('mouseup',  e=>{e.preventDefault();stopMicNow();micModeActive=false;updateMicToggleBtn();});
+micFloatEl.addEventListener('mouseleave',e=>{if(micOn){stopMicNow();micModeActive=false;updateMicToggleBtn();}});
 micFloatEl.addEventListener('touchstart',e=>{e.preventDefault();startMicNow();},{passive:false});
-micFloatEl.addEventListener('touchend',  e=>{e.preventDefault();stopMicNow();},{passive:false});
-micFloatEl.addEventListener('touchcancel',()=>{if(micOn)stopMicNow();});
+micFloatEl.addEventListener('touchend',  e=>{e.preventDefault();stopMicNow();micModeActive=false;updateMicToggleBtn();},{passive:false});
+micFloatEl.addEventListener('touchcancel',()=>{if(micOn){stopMicNow();micModeActive=false;updateMicToggleBtn();}});
 
-// Inline mic (hidden on desktop, push-to-talk)
+// Inline mic (hidden, keep for compat)
 const micBtnEl=document.getElementById('mic-btn');
 micBtnEl.addEventListener('mousedown',e=>{e.preventDefault();startMicNow();});
 micBtnEl.addEventListener('mouseup',  e=>{e.preventDefault();stopMicNow();});
 micBtnEl.addEventListener('touchstart',e=>{e.preventDefault();startMicNow();},{passive:false});
 micBtnEl.addEventListener('touchend',  e=>{e.preventDefault();stopMicNow();},{passive:false});
 document.addEventListener('keydown',e=>{
-  // FIX 2: Spacebar = push-to-talk on desktop (hold=start, release=stop)
+  // Spacebar = toggle mic mode (same as clicking the MIC button)
   if(e.code==='Space'&&e.target!==document.getElementById('ans-inp')&&S.active&&!paused){
-    e.preventDefault();if(!micOn)startMicNow();return;
+    e.preventDefault();toggleMicMode();return;
   }
   if(e.key==='Escape'){if(document.getElementById('timer-config').style.display==='flex'){closeTimerConfig();return;}if(document.getElementById('confirm-overlay').style.display==='flex'){cancelConfirm();return;}askConfirmReset();return;}
   if(e.key==='Enter'){if(document.getElementById('start-screen').style.display!=='none'){beginGame();return;}if(document.getElementById('confirm-overlay').style.display==='flex'){confirmReset();return;}if(paused){resumeGame();return;}if(S.active)submitAns();return;}
   if(S.active&&!paused&&e.key.length===1&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&e.code!=='Space')document.getElementById('ans-inp').focus();
 });
 document.addEventListener('keyup',e=>{
-  // Release spacebar = stop mic
-  if(e.code==='Space'&&e.target!==document.getElementById('ans-inp')){
-    e.preventDefault();if(micOn)stopMicNow();
-  }
+  // No action needed — mic is toggle not push-to-talk
 });
 
 function askConfirmReset(){document.getElementById('confirm-overlay').style.display='flex';}
@@ -951,6 +998,7 @@ function confirmReset(){document.getElementById('confirm-overlay').style.display
 function hardReset(){
   if(S.timer)clearInterval(S.timer);
   stopBlink();stopMicNow();S.active=false;paused=false;timerLocked=false;
+  micModeActive=false;updateMicToggleBtn();
   leaderboard=[];usedRoscoIdx=[];
   ['q-panel','lb-panel','player-name-tag','pause-overlay','end-screen'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
   document.getElementById('mic-float').className=''; // hide
@@ -1075,6 +1123,7 @@ function advance(){
 }
 function endGame(){
   if(S.timer)clearInterval(S.timer);stopBlink();stopMicNow();S.active=false;
+  micModeActive=false;updateMicToggleBtn();
   document.getElementById('q-panel').style.display='none';document.getElementById('player-name-tag').style.display='none';document.getElementById('pause-overlay').style.display='none';
   document.getElementById('mic-float').className=''; // hide
   saveScore();renderInGameLB();
