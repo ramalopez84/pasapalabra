@@ -136,7 +136,7 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
     </div>
     <div id="player-name-tag"></div>
     <!-- Floating mic button — bottom right, thumb zone -->
-    <div id="mic-float">&#127908;</div>
+    <div id="mic-float" title="Mantené Ctrl para hablar (desktop) o mantenés presionado este botón (mobile)">&#127908;</div>
     <div id="lb-panel"><div id="lb-title-el">TABLA</div><div id="lb-list"></div></div>
     <div id="pause-overlay"><div id="pause-msg"></div><button id="btn-resume" onclick="resumeGame()">&#9654; REANUDAR</button></div>
     <div id="timer-config">
@@ -936,19 +936,17 @@ micBtnEl.addEventListener('mouseup',  e=>{e.preventDefault();stopMicNow();});
 micBtnEl.addEventListener('touchstart',e=>{e.preventDefault();startMicNow();},{passive:false});
 micBtnEl.addEventListener('touchend',  e=>{e.preventDefault();stopMicNow();},{passive:false});
 document.addEventListener('keydown',e=>{
-  // Spacebar = push-to-talk ONLY when input is NOT focused
-  if(e.code==='Space'&&document.activeElement!==document.getElementById('ans-inp')&&S.active&&!paused){
+  // Ctrl = push-to-talk mic (works regardless of which element has focus)
+  if(e.code==='ControlLeft'&&S.active&&!paused){
     e.preventDefault();if(!micOn)startMicNow();return;
   }
   if(e.key==='Escape'){if(document.getElementById('timer-config').style.display==='flex'){closeTimerConfig();return;}if(document.getElementById('confirm-overlay').style.display==='flex'){cancelConfirm();return;}askConfirmReset();return;}
   if(e.key==='Enter'){if(document.getElementById('start-screen').style.display!=='none'){beginGame();return;}if(document.getElementById('confirm-overlay').style.display==='flex'){confirmReset();return;}if(paused){resumeGame();return;}if(S.active)submitAns();return;}
-  if(S.active&&!paused&&e.key.length===1&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&e.code!=='Space')document.getElementById('ans-inp').focus();
+  if(S.active&&!paused&&e.key.length===1&&!e.ctrlKey&&!e.metaKey&&!e.altKey)document.getElementById('ans-inp').focus();
 });
 document.addEventListener('keyup',e=>{
-  // Release spacebar = stop mic (push-to-hold pattern)
-  if(e.code==='Space'&&document.activeElement!==document.getElementById('ans-inp')){
-    e.preventDefault();if(micOn)stopMicNow();
-  }
+  // Release Ctrl = stop mic
+  if(e.code==='ControlLeft'&&micOn){e.preventDefault();stopMicNow();}
 });
 
 function askConfirmReset(){document.getElementById('confirm-overlay').style.display='flex';}
