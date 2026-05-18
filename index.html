@@ -103,10 +103,10 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
 #help-modal .sub{color:#7799bb;font-size:clamp(11px,1.4vw,14px);margin-bottom:18px;text-align:center;font-weight:700;}
 .help-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;width:100%;max-width:760px;}
 .hc{background:rgba(255,255,255,.05);border:1px solid rgba(100,160,255,.2);border-radius:12px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;}
-.hc-icon{font-size:22px;flex-shrink:0;margin-top:1px;}
+.hc-icon{font-size:32px;flex-shrink:0;margin-top:2px;line-height:1;}
 .hc-body{display:flex;flex-direction:column;gap:3px;}
 .hc-title{font-weight:900;color:#88ccff;font-size:clamp(10px,1.1vw,12px);text-transform:uppercase;letter-spacing:.5px;}
-.hc-text{color:#ccddf0;font-weight:700;font-size:clamp(11px,1.2vw,13px);line-height:1.45;}
+.hc-text{color:#ccddf0;font-weight:600;font-size:clamp(10px,1vw,11.5px);line-height:1.4;}
 .hc-text kbd{background:rgba(80,150,255,.25);border:1px solid rgba(100,160,255,.5);border-radius:4px;padding:1px 5px;font-family:'Nunito',sans-serif;color:#aaddff;}
 #btn-close-help{margin-top:18px;background:linear-gradient(135deg,#1144cc,#44aaff);color:#fff;border-radius:40px;border:none;font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(13px,1.5vw,16px);padding:11px 34px;cursor:pointer;box-shadow:0 6px 28px rgba(68,170,255,.4);}
 #btn-close-help:hover{opacity:.9;}
@@ -133,53 +133,6 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
         <button class="icon-btn ibtn-fs  clickable" id="fs-btn"  onclick="toggleFS()">&#9974;</button>
         <button id="btn-help" onclick="showInstructions()">?</button>
       </div>
-    </div>
-      <div id="instr-subtitle">¿CÓMO SE JUEGA?</div>
-      <div id="instr-grid">
-        <div class="instr-card">
-          <div class="instr-icon">&#127908;</div>
-          <div class="instr-text-wrap">
-            <span class="instr-label">Micrófono</span>
-            <span class="instr-desc">Desktop: mantené <kbd>Ctrl</kbd> para hablar, soltá para confirmar. Mobile: mantenés presionado el botón 🎤.</span>
-          </div>
-        </div>
-        <div class="instr-card">
-          <div class="instr-icon">&#128247;</div>
-          <div class="instr-text-wrap">
-            <span class="instr-label">Cámara</span>
-            <span class="instr-desc">Activá la cámara frontal con el ícono 📷 arriba a la derecha para que todos te vean jugar.</span>
-          </div>
-        </div>
-        <div class="instr-card">
-          <div class="instr-icon">&#9998;</div>
-          <div class="instr-text-wrap">
-            <span class="instr-label">Respuestas</span>
-            <span class="instr-desc">Una sola palabra o nombre. Sin tildes, el juego las ignora. Presioná <kbd>Enter</kbd> o el botón OK para confirmar.</span>
-          </div>
-        </div>
-        <div class="instr-card">
-          <div class="instr-icon">&#8629;</div>
-          <div class="instr-text-wrap">
-            <span class="instr-label">Pasapalabra</span>
-            <span class="instr-desc">Si no sabés la respuesta, pasá y volvé después. Las letras en amarillo son las que pasaste.</span>
-          </div>
-        </div>
-        <div class="instr-card">
-          <div class="instr-icon">&#9201;</div>
-          <div class="instr-text-wrap">
-            <span class="instr-label">Tiempo</span>
-            <span class="instr-desc">Hay tiempo limitado. El primer jugador puede configurarlo entre 2 y 5 minutos antes de empezar.</span>
-          </div>
-        </div>
-        <div class="instr-card">
-          <div class="instr-icon">&#127942;</div>
-          <div class="instr-text-wrap">
-            <span class="instr-label">Competencia</span>
-            <span class="instr-desc">Cada jugador recibe un rosco diferente. Gana quien más respuestas correctas acumule en el tiempo.</span>
-          </div>
-        </div>
-      </div>
-      <button id="btn-instr-ok" onclick="hideInstructions()">&#128640; ¡ENTENDIDO, A JUGAR!</button>
     </div>
     <div id="q-panel" style="display:none">
       <div id="q-tipo">EMPIEZA POR A</div>
@@ -223,7 +176,6 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
       </div>
       <input id="name-inp" type="text" placeholder="TU NOMBRE" maxlength="14" autocomplete="off"/>
       <button class="btn-big" id="play-btn" onclick="beginGame()">JUGAR</button>
-      <button onclick="showInstructions()" style="background:none;border:none;color:#4466aa;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:1px;margin-top:-4px;">&#63; Ver instrucciones</button>
     </div>
     <div id="end-screen">
       <div id="end-name"></div>
@@ -236,19 +188,55 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
   </div>
 </div><!-- end stage -->
 
-<!-- Help modal — outside #stage, no layout dependency -->
+<!-- Help modal — outside #stage, triggered only by ? button -->
 <div id="help-modal">
-  <h2>&#127381; ¿CÓMO SE JUEGA?</h2>
+  <h2>¿CÓMO SE JUEGA?</h2>
   <div class="sub">EL ROSCO — PASAPALABRA</div>
   <div class="help-grid">
-    <div class="hc"><div class="hc-icon">&#127908;</div><div class="hc-body"><span class="hc-title">Micrófono</span><span class="hc-text">Mantené <kbd>Ctrl</kbd> (desktop) o el botón 🎤 (mobile) para dictar tu respuesta. El texto aparece en el campo — revisalo antes de confirmar con <kbd>Enter</kbd> o haciendo clic en OK.</span></div></div>
-    <div class="hc"><div class="hc-icon">&#128247;</div><div class="hc-body"><span class="hc-title">Cámara</span><span class="hc-text">Activá la cámara frontal con el ícono 📷 arriba a la derecha para que puedas verte jugar.</span></div></div>
-    <div class="hc"><div class="hc-icon">&#9998;</div><div class="hc-body"><span class="hc-title">Respuestas</span><span class="hc-text">Cada respuesta es una sola palabra (o nombre). Escribí con o sin tildes, el juego las ignora.</span></div></div>
-    <div class="hc"><div class="hc-icon">&#8629;</div><div class="hc-body"><span class="hc-title">Pasapalabra</span><span class="hc-text">Si no sabés la respuesta… ¡Pasapalabra! Y la respondés después. Las letras en amarillo son las que pasaste.</span></div></div>
-    <div class="hc"><div class="hc-icon">&#9201;</div><div class="hc-body"><span class="hc-title">Tiempo</span><span class="hc-text">Tenés tiempo limitado. El primer jugador lo configura antes de empezar y se mantiene durante toda la partida.</span></div></div>
-    <div class="hc"><div class="hc-icon">&#127942;</div><div class="hc-body"><span class="hc-title">Competencia</span><span class="hc-text">Cada jugador recibe un rosco diferente. Gana quien más respuestas correctas acumule en el menor tiempo posible. Se muestran los mejores 10 resultados.</span></div></div>
+    <div class="hc">
+      <div class="hc-icon">🎤</div>
+      <div class="hc-body">
+        <span class="hc-title">Micrófono</span>
+        <span class="hc-text">Mantené <kbd>Ctrl</kbd> (desktop) o el botón 🎤 (mobile) para dictar tu respuesta. El texto aparece en el campo — revisalo antes de confirmar con <kbd>Enter</kbd> o haciendo clic en OK.</span>
+      </div>
+    </div>
+    <div class="hc">
+      <div class="hc-icon">📷</div>
+      <div class="hc-body">
+        <span class="hc-title">Cámara</span>
+        <span class="hc-text">Activá la cámara frontal con el ícono 📷 arriba a la derecha para que puedas verte jugar.</span>
+      </div>
+    </div>
+    <div class="hc">
+      <div class="hc-icon">✍️</div>
+      <div class="hc-body">
+        <span class="hc-title">Respuestas</span>
+        <span class="hc-text">Cada respuesta es una sola palabra (o nombre). Escribí con o sin tildes, el juego las ignora.</span>
+      </div>
+    </div>
+    <div class="hc">
+      <div class="hc-icon">↩️</div>
+      <div class="hc-body">
+        <span class="hc-title">Pasapalabra</span>
+        <span class="hc-text">Si no sabés la respuesta… ¡Pasapalabra! Y la respondés después. Las letras en amarillo son las que pasaste.</span>
+      </div>
+    </div>
+    <div class="hc">
+      <div class="hc-icon">⏱️</div>
+      <div class="hc-body">
+        <span class="hc-title">Tiempo</span>
+        <span class="hc-text">Tenés tiempo limitado. El primer jugador lo configura antes de empezar y se mantiene durante toda la partida.</span>
+      </div>
+    </div>
+    <div class="hc">
+      <div class="hc-icon">🏆</div>
+      <div class="hc-body">
+        <span class="hc-title">Competencia</span>
+        <span class="hc-text">Cada jugador recibe un rosco diferente. Gana quien más respuestas correctas acumule en el menor tiempo posible. Se muestran los mejores 10 resultados.</span>
+      </div>
+    </div>
   </div>
-  <button id="btn-close-help" onclick="hideInstructions()">&#128640; ¡ENTENDIDO, A JUGAR!</button>
+  <button id="btn-close-help" onclick="hideInstructions()">🚀 ¡ENTENDIDO, A JUGAR!</button>
 </div>
 <script>
 const BASE_ROSCOS = [
