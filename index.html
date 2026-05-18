@@ -97,24 +97,21 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
 #end-sub{color:#7799bb;}
 #end-lb-wrap{width:100%;}
 #end-lb-title{color:#88ccff;font-weight:800;letter-spacing:2px;text-align:center;}
-/* ── Instructions overlay ─────────────────────────────── */
-#instructions-overlay{position:absolute;inset:0;z-index:70;background:rgba(0,2,18,.97);display:none;flex-direction:column;align-items:center;justify-content:center;pointer-events:all;padding:4%;}
-#instructions-overlay.visible{display:flex;}
-#instr-title{font-weight:900;color:#fff;letter-spacing:3px;text-shadow:0 0 24px rgba(80,160,255,.5);text-align:center;}
-#instr-subtitle{color:#7799bb;font-weight:700;letter-spacing:1px;text-align:center;}
-#instr-grid{display:grid;grid-template-columns:1fr 1fr;width:100%;max-width:820px;}
-.instr-card{background:rgba(255,255,255,.045);border:1px solid rgba(100,160,255,.18);border-radius:14px;display:flex;align-items:flex-start;gap:10px;}
-.instr-icon{flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(30,80,220,.25);border:2px solid rgba(80,150,255,.35);}
-.instr-text-wrap{display:flex;flex-direction:column;gap:3px;}
-.instr-label{font-weight:900;color:#88ccff;letter-spacing:.5px;text-transform:uppercase;}
-.instr-desc{color:#ccddf0;font-weight:700;line-height:1.45;}
-.instr-desc kbd{background:rgba(80,150,255,.25);border:1px solid rgba(100,160,255,.5);border-radius:5px;padding:1px 6px;font-family:'Nunito',sans-serif;color:#aaddff;font-size:.9em;}
-#btn-instr-ok{background:linear-gradient(135deg,#1144cc,#44aaff);color:#fff;border-radius:40px;border:none;font-family:'Nunito',sans-serif;font-weight:900;letter-spacing:1px;cursor:pointer;box-shadow:0 6px 28px rgba(68,170,255,.45);transition:opacity .15s,transform .1s;}
-#btn-instr-ok:hover{opacity:.9;}
-#btn-instr-ok:active{transform:scale(.96);}
-/* Help button — always visible top-right during game */
-#btn-help{position:absolute;z-index:31;border-radius:50%;border:none;background:rgba(30,60,140,.7);color:#88ccff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:900;font-family:'Nunito',sans-serif;box-shadow:0 2px 10px rgba(20,60,180,.4);transition:background .15s;}
-#btn-help:hover{background:rgba(50,100,220,.8);}
+/* ── Help modal (simple, no layout dependency) ─────────── */
+#help-modal{position:fixed;inset:0;z-index:999;background:rgba(0,5,25,.96);display:none;flex-direction:column;align-items:center;justify-content:center;padding:5% 6%;pointer-events:all;}
+#help-modal h2{font-weight:900;color:#fff;letter-spacing:3px;font-size:clamp(18px,3vw,32px);margin-bottom:6px;text-align:center;}
+#help-modal .sub{color:#7799bb;font-size:clamp(11px,1.4vw,14px);margin-bottom:18px;text-align:center;font-weight:700;}
+.help-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;width:100%;max-width:760px;}
+.hc{background:rgba(255,255,255,.05);border:1px solid rgba(100,160,255,.2);border-radius:12px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;}
+.hc-icon{font-size:22px;flex-shrink:0;margin-top:1px;}
+.hc-body{display:flex;flex-direction:column;gap:3px;}
+.hc-title{font-weight:900;color:#88ccff;font-size:clamp(10px,1.1vw,12px);text-transform:uppercase;letter-spacing:.5px;}
+.hc-text{color:#ccddf0;font-weight:700;font-size:clamp(11px,1.2vw,13px);line-height:1.45;}
+.hc-text kbd{background:rgba(80,150,255,.25);border:1px solid rgba(100,160,255,.5);border-radius:4px;padding:1px 5px;font-family:'Nunito',sans-serif;color:#aaddff;}
+#btn-close-help{margin-top:18px;background:linear-gradient(135deg,#1144cc,#44aaff);color:#fff;border-radius:40px;border:none;font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(13px,1.5vw,16px);padding:11px 34px;cursor:pointer;box-shadow:0 6px 28px rgba(68,170,255,.4);}
+#btn-close-help:hover{opacity:.9;}
+#btn-help{border-radius:50%;border:2px solid rgba(100,160,255,.4);background:rgba(20,50,130,.7);color:#88ccff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:900;font-family:'Nunito',sans-serif;font-size:14px;width:36px;height:36px;flex-shrink:0;transition:background .15s;}
+#btn-help:hover{background:rgba(40,90,200,.85);}
 </head>
 <body>
 <div id="stage">
@@ -133,13 +130,9 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
       <div id="top-right">
         <button class="icon-btn ibtn-cam clickable" id="cam-btn" onclick="toggleCam()">&#128247;</button>
         <button class="icon-btn ibtn-fs  clickable" id="fs-btn"  onclick="toggleFS()">&#9974;</button>
-        <button id="btn-help" onclick="showInstructions()" title="Ver instrucciones">?</button>
+        <button id="btn-help" onclick="showInstructions()">?</button>
       </div>
     </div>
-
-    <!-- Instructions overlay — shown once per session -->
-    <div id="instructions-overlay">
-      <div id="instr-title">EL ROSCO</div>
       <div id="instr-subtitle">¿CÓMO SE JUEGA?</div>
       <div id="instr-grid">
         <div class="instr-card">
@@ -229,6 +222,7 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
       </div>
       <input id="name-inp" type="text" placeholder="TU NOMBRE" maxlength="14" autocomplete="off"/>
       <button class="btn-big" id="play-btn" onclick="beginGame()">JUGAR</button>
+      <button onclick="showInstructions()" style="background:none;border:none;color:#4466aa;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:1px;margin-top:-4px;">&#63; Ver instrucciones</button>
     </div>
     <div id="end-screen">
       <div id="end-name"></div>
@@ -239,6 +233,21 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
       <button class="btn-big" id="again-btn" onclick="newPlayer()">SIGUIENTE JUGADOR</button>
     </div>
   </div>
+</div><!-- end stage -->
+
+<!-- Help modal — outside #stage, no layout dependency -->
+<div id="help-modal">
+  <h2>&#127381; ¿CÓMO SE JUEGA?</h2>
+  <div class="sub">EL ROSCO — PASAPALABRA</div>
+  <div class="help-grid">
+    <div class="hc"><div class="hc-icon">&#127908;</div><div class="hc-body"><span class="hc-title">Micrófono</span><span class="hc-text">Mantené <kbd>Ctrl</kbd> (desktop) o el botón 🎤 (mobile) para dictar tu respuesta. El texto aparece en el campo — revisalo antes de confirmar con <kbd>Enter</kbd> o haciendo clic en OK.</span></div></div>
+    <div class="hc"><div class="hc-icon">&#128247;</div><div class="hc-body"><span class="hc-title">Cámara</span><span class="hc-text">Activá la cámara frontal con el ícono 📷 arriba a la derecha para que puedas verte jugar.</span></div></div>
+    <div class="hc"><div class="hc-icon">&#9998;</div><div class="hc-body"><span class="hc-title">Respuestas</span><span class="hc-text">Cada respuesta es una sola palabra (o nombre). Escribí con o sin tildes, el juego las ignora.</span></div></div>
+    <div class="hc"><div class="hc-icon">&#8629;</div><div class="hc-body"><span class="hc-title">Pasapalabra</span><span class="hc-text">Si no sabés la respuesta… ¡Pasapalabra! Y la respondés después. Las letras en amarillo son las que pasaste.</span></div></div>
+    <div class="hc"><div class="hc-icon">&#9201;</div><div class="hc-body"><span class="hc-title">Tiempo</span><span class="hc-text">Tenés tiempo limitado. El primer jugador lo configura antes de empezar y se mantiene durante toda la partida.</span></div></div>
+    <div class="hc"><div class="hc-icon">&#127942;</div><div class="hc-body"><span class="hc-title">Competencia</span><span class="hc-text">Cada jugador recibe un rosco diferente. Gana quien más respuestas correctas acumule en el menor tiempo posible. Se muestran los mejores 10 resultados.</span></div></div>
+  </div>
+  <button id="btn-close-help" onclick="hideInstructions()">&#128640; ¡ENTENDIDO, A JUGAR!</button>
 </div>
 <script>
 const BASE_ROSCOS = [
@@ -738,9 +747,6 @@ function layout(){
     document.getElementById('again-btn').style.cssText+=`;font-size:14px;padding:10px 26px;margin-top:16px;`;
     document.getElementById('timer-start-val').textContent=TOTAL_TIME+' SEG';
 
-    // Instructions overlay sizing
-    layoutInstructions(W,H,sc,mobile);
-
   } else {
   // ── DESKTOP LAYOUT ──────────────────────────────────────────────
     const usableTop=H*0.10, usableBot=H*0.92;
@@ -848,56 +854,10 @@ function layout(){
     document.getElementById('end-lb-title').style.marginBottom=sc*8+'px';
     document.getElementById('end-lb-wrap').style.cssText=`max-width:${Math.min(W*0.60,440)}px;width:100%;`;
     document.getElementById('again-btn').style.cssText+=`;font-size:${sc*15}px;padding:${sc*10}px ${sc*28}px;margin-top:${sc*22}px;`;
-
-    // Instructions overlay sizing
-    layoutInstructions(W,H,sc,mobile);
   }
   drawRosco();
 }
 
-function layoutInstructions(W,H,sc,mobile){
-  const ov=document.getElementById('instructions-overlay');
-  ov.style.padding=mobile?`${H*0.04}px ${W*0.05}px`:`${H*0.05}px ${W*0.06}px`;
-  ov.style.gap=sc*12+'px';
-
-  document.getElementById('instr-title').style.fontSize=sc*(mobile?28:38)+'px';
-  document.getElementById('instr-subtitle').style.fontSize=sc*(mobile?11:13)+'px';
-  document.getElementById('instr-subtitle').style.marginTop=sc*2+'px';
-
-  const grid=document.getElementById('instr-grid');
-  grid.style.gridTemplateColumns=mobile?'1fr':'1fr 1fr';
-  grid.style.gap=sc*(mobile?8:10)+'px';
-  grid.style.marginTop=sc*6+'px';
-  grid.style.width='100%';
-  grid.style.maxWidth=mobile?'100%':'800px';
-
-  const iconSz=sc*(mobile?28:34);
-  const cardPad=sc*(mobile?8:11);
-  const cardGap=sc*(mobile?7:10);
-  const labelSz=sc*(mobile?9:10);
-  const descSz=sc*(mobile?9.5:11);
-  document.querySelectorAll('.instr-card').forEach(c=>{
-    c.style.padding=cardPad+'px';c.style.gap=cardGap+'px';c.style.borderRadius=sc*10+'px';
-  });
-  document.querySelectorAll('.instr-icon').forEach(ic=>{
-    ic.style.width=ic.style.height=iconSz+'px';ic.style.fontSize=iconSz*0.52+'px';ic.style.minWidth=iconSz+'px';
-  });
-  document.querySelectorAll('.instr-label').forEach(l=>l.style.fontSize=labelSz+'px');
-  document.querySelectorAll('.instr-desc').forEach(d=>{d.style.fontSize=descSz+'px';});
-  document.querySelectorAll('.instr-desc kbd').forEach(k=>k.style.fontSize=descSz*0.9+'px');
-
-  const okBtn=document.getElementById('btn-instr-ok');
-  okBtn.style.fontSize=sc*(mobile?14:16)+'px';
-  okBtn.style.padding=`${sc*11}px ${sc*36}px`;
-  okBtn.style.marginTop=sc*4+'px';
-
-  // Help button sizing (top-right)
-  const hb=document.getElementById('btn-help');
-  const ibSz=mobile?H*0.052:H*0.060;
-  hb.style.width=hb.style.height=ibSz+'px';
-  hb.style.fontSize=ibSz*0.46+'px';
-  // Position it right after fs-btn in top-right — handled by flex gap
-}
 
 function setRound(id,size,left,top){const el=document.getElementById(id);el.style.width=el.style.height=size+'px';el.style.left=left+'px';el.style.top=top+'px';}
 
@@ -944,11 +904,8 @@ async function startCam(){
   catch(e){btn.innerHTML='&#128683;';}
 }
 function stopCam(){if(camStream)camStream.getTracks().forEach(t=>t.stop());camStream=null;document.getElementById('vid').style.display='none';const btn=document.getElementById('cam-btn');btn.className='icon-btn ibtn-cam clickable';btn.innerHTML='&#128247;';camOn=false;}
-function showInstructions(){document.getElementById('instructions-overlay').classList.add('visible');}
-function hideInstructions(){
-  document.getElementById('instructions-overlay').classList.remove('visible');
-  sessionStorage.setItem('instrSeen','1');
-}
+function showInstructions(){document.getElementById('help-modal').style.display='flex';}
+function hideInstructions(){document.getElementById('help-modal').style.display='none';}
 
 function toggleFS(){
   const inFS=!!(document.fullscreenElement||document.webkitFullscreenElement);
