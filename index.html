@@ -2373,6 +2373,7 @@ function newPlayer(){
   // FIX 6: Do NOT exit fullscreen - stay in FS mode for next player
   // Just re-layout so everything fits correctly in current window size
   initState(false);drawRosco();layout();
+  setTimeout(()=>{document.getElementById('name-inp').focus();},100);
 }
 document.getElementById('name-inp').addEventListener('keydown',e=>{if(e.key==='Enter')beginGame();});
 
@@ -2398,6 +2399,11 @@ if(window.visualViewport){
 
 initState(false);
 layout();
+// Auto-focus name field so the user can type immediately without clicking
+setTimeout(()=>{
+  const ni=document.getElementById('name-inp');
+  if(ni) ni.focus();
+},100);
 </script>
 </body>
 </html>
