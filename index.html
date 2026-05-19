@@ -14,7 +14,7 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
 #overlay{position:absolute;inset:0;z-index:10;}
 #rosco-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
 /* Floating mic button — bottom right, thumb-friendly */
-#mic-float{position:absolute;right:0;bottom:0;z-index:40;border-radius:50%;border:3px solid rgba(255,255,255,.7);background:radial-gradient(circle at 36% 28%,#7ab4ff,#1a4aaa);color:#fff;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(30,80,220,.6),inset 0 2px 0 rgba(255,255,255,.3);touch-action:none;user-select:none;-webkit-user-select:none;transition:background .2s,box-shadow .2s;}
+#mic-float{position:fixed;right:0;bottom:0;z-index:40;border-radius:50%;border:3px solid rgba(255,255,255,.7);background:radial-gradient(circle at 36% 28%,#7ab4ff,#1a4aaa);color:#fff;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(30,80,220,.6),inset 0 2px 0 rgba(255,255,255,.3);touch-action:none;user-select:none;-webkit-user-select:none;transition:background .2s,box-shadow .2s;}
 #mic-float.active-game{display:flex;}
 #mic-float.listening{border-color:#ff4444;background:radial-gradient(circle at 36% 28%,#ff8888,#aa0000);box-shadow:0 4px 24px rgba(255,30,30,.7);animation:micpulse .5s infinite alternate;}
 @keyframes micpulse{to{box-shadow:0 0 22px rgba(255,50,50,.9);}}
@@ -520,7 +520,7 @@ const BASE_ROSCOS=[
  {p:"Proceso de unión de dos células sexuales para dar origen a un nuevo individuo",r:"FERTILIZACION",t:"e"},
  {p:"Técnica del fútbol de llevar la pelota esquivando rivales con cambios de dirección",r:"GAMBETA",t:"e"},
  {p:"Escritor americano Premio Nobel que escribió El viejo y el mar",r:"HEMINGWAY",t:"e"},
- {p:"País europeo donde se inventó el fútbol que sólo ganó un campeonato mundial",r:"INGLATERRA",t:"e"},
+ {p:"País europeo donde se inventó el fútbol que nunca ganó un campeonato mundial",r:"INGLATERRA",t:"e"},
  {p:"Árbol tropical de tallo largo que produce frutos grandes directamente del tronco",r:"JACA",t:"e"},
  {p:"Artista australiana de pop electrónico conocida por Can't Get You Out of My Head",r:"KYLIE",t:"e"},
  {p:"Relato breve de origen medieval con animales que hablan y moraleja al final",r:"FABULA",t:"c"},
@@ -1360,7 +1360,7 @@ const BASE_ROSCOS=[
  {p:"Proceso biológico por el que las plantas producen glucosa usando luz solar",r:"FOTOSINTESIS",t:"e"},
  {p:"Proceso por el que una semilla germina y comienza a convertirse en planta",r:"GERMINACION",t:"e"},
  {p:"Elemento químico más ligero del universo símbolo H número atómico 1",r:"HIDROGENO",t:"e"},
- {p:"País europeo donde se inventó el fútbol que sólo ganó un campeonato mundial",r:"INGLATERRA",t:"e"},
+ {p:"País europeo donde se inventó el fútbol que nunca ganó un campeonato mundial",r:"INGLATERRA",t:"e"},
  {p:"Nombre de pila del escritor Cortázar autor de Rayuela ícono del boom latinoamericano",r:"JULIO",t:"e"},
  {p:"Sistema de gestión visual japonés que organiza el trabajo con tarjetas en columnas",r:"KANBAN",t:"e"},
  {p:"Instrumento que mide la distancia entre dos puntos de forma electrónica",r:"TELÉMETRO",t:"c"},
@@ -1855,7 +1855,7 @@ function layout(){
     mf.style.width=mf.style.height=micSz+'px';
     mf.style.fontSize=micSz*0.44+'px';
     mf.style.right=micInset+'px';
-    mf.style.bottom=micInset+'px';
+    mf.style.bottom=(micInset+20)+'px'; // extra bottom so stays above browser nav bar
 
     // Top bar
     const ibSize=Math.min(H*0.055, W*0.115, 46);
@@ -1871,16 +1871,16 @@ function layout(){
     const qd=innerR*1.84;
     const qp=document.getElementById('q-panel');
     Object.assign(qp.style,{width:qd+'px',height:qd+'px',left:(cx-qd/2)+'px',top:(cy-qd/2)+'px',
-      gap:Math.max(2,innerR*0.025)+'px',padding:`${innerR*0.06}px ${innerR*0.10}px`});
+      gap:Math.max(3,innerR*0.04)+'px',padding:`${innerR*0.07}px ${innerR*0.10}px`});
     document.getElementById('q-tipo').style.fontSize=Math.min(innerR*0.16,13)+'px';
-    document.getElementById('q-big-letter').style.fontSize=Math.min(innerR*0.64,54)+'px';
+    document.getElementById('q-big-letter').style.fontSize=Math.min(innerR*0.42,36)+'px';
     document.getElementById('q-text').style.fontSize=Math.min(innerR*0.18,15)+'px';
     document.getElementById('q-feedback').style.fontSize=Math.min(innerR*0.13,12)+'px';
     document.getElementById('q-divider').style.margin='2px 0';
     document.getElementById('ans-inp').style.fontSize=Math.min(innerR*0.145,14)+'px';
     document.getElementById('ans-inp').style.padding=`${innerR*0.075}px ${innerR*0.12}px`;
-    const btnH=Math.min(innerR*0.28,28);
-    document.getElementById('action-row').style.marginTop='2px';
+    const btnH=Math.min(innerR*0.32,34);
+    document.getElementById('action-row').style.marginTop='3px';
     document.getElementById('action-row').style.borderRadius=btnH*0.5+'px';
     document.getElementById('btn-ok').style.cssText+=`;font-size:${Math.min(innerR*0.14,13)}px;height:${btnH}px;`;
     document.getElementById('btn-pasa').style.cssText+=`;font-size:${Math.min(innerR*0.14,13)}px;height:${btnH}px;`;
@@ -1888,7 +1888,7 @@ function layout(){
     // Player name tag
     const pnt=document.getElementById('player-name-tag');
     const pntVis=pnt.style.display==='block';
-    const nameInsideY=cy+innerR*0.70;
+    const nameInsideY=cy+innerR*0.80;
     pnt.style.cssText=`position:absolute;left:50%;transform:translateX(-50%);top:${nameInsideY}px;font-size:${Math.min(innerR*0.17,13)}px;padding:3px 14px;background:rgba(0,0,40,.82);border:1.5px solid rgba(100,160,255,.45);border-radius:30px;color:#ffcc44;font-weight:900;letter-spacing:2px;text-transform:uppercase;pointer-events:none;z-index:25;white-space:nowrap;display:${pntVis?'block':'none'};`;
 
     // Leaderboard
@@ -1979,7 +1979,7 @@ function layout(){
     const qp=document.getElementById('q-panel');
     Object.assign(qp.style,{width:qd+'px',height:qd+'px',left:(cx-qd/2)+'px',top:(cy-qd/2)+'px',gap:sc*2.5+'px',padding:`${innerR*0.07}px ${innerR*0.11}px`});
     document.getElementById('q-tipo').style.fontSize=Math.min(innerR*0.155,sc*13)+'px';
-    document.getElementById('q-big-letter').style.fontSize=Math.min(innerR*0.62,sc*60)+'px';
+    document.getElementById('q-big-letter').style.fontSize=Math.min(innerR*0.44,sc*48)+'px';
     document.getElementById('q-text').style.fontSize=Math.min(innerR*0.175,sc*16.5)+'px';
     document.getElementById('q-feedback').style.fontSize=sc*12+'px';
     document.getElementById('q-divider').style.margin=`${sc*2}px 0`;
@@ -1993,7 +1993,7 @@ function layout(){
 
     const pnt=document.getElementById('player-name-tag');
     const pntVis=pnt.style.display==='block';
-    const nameInsideY=cy+innerR*0.72;
+    const nameInsideY=cy+innerR*0.82;
     pnt.style.cssText=`position:absolute;left:50%;transform:translateX(-50%);top:${nameInsideY}px;font-size:${Math.min(innerR*0.17,sc*15)}px;padding:${sc*4}px ${sc*16}px;background:rgba(0,0,40,.82);border:1.5px solid rgba(100,160,255,.45);border-radius:30px;color:#ffcc44;font-weight:900;letter-spacing:2px;text-transform:uppercase;pointer-events:none;z-index:25;white-space:nowrap;display:${pntVis?'block':'none'};`;
 
     const lbW=W*0.20;
@@ -2194,12 +2194,18 @@ function stopMicNow(){
 
 // ── Floating mic: push-to-hold (mobile + desktop) ─────────────
 const micFloatEl=document.getElementById('mic-float');
-micFloatEl.addEventListener('mousedown', e=>{e.preventDefault();startMicNow();});
-micFloatEl.addEventListener('mouseup',   e=>{e.preventDefault();stopMicNow();});
-micFloatEl.addEventListener('mouseleave',e=>{if(micOn)stopMicNow();});
-micFloatEl.addEventListener('touchstart',e=>{e.preventDefault();startMicNow();},{passive:false});
-micFloatEl.addEventListener('touchend',  e=>{e.preventDefault();stopMicNow();},{passive:false});
-micFloatEl.addEventListener('touchcancel',()=>{if(micOn)stopMicNow();});
+// Use pointer events (covers both mouse and touch uniformly) + fallback
+function _micDown(e){e.preventDefault();e.stopPropagation();startMicNow();}
+function _micUp(e){e.preventDefault();e.stopPropagation();stopMicNow();}
+micFloatEl.addEventListener('pointerdown', _micDown, {passive:false});
+micFloatEl.addEventListener('pointerup',   _micUp,   {passive:false});
+micFloatEl.addEventListener('pointercancel',()=>{if(micOn)stopMicNow();});
+micFloatEl.addEventListener('touchstart',  _micDown, {passive:false});
+micFloatEl.addEventListener('touchend',    _micUp,   {passive:false});
+micFloatEl.addEventListener('touchcancel', ()=>{if(micOn)stopMicNow();});
+micFloatEl.addEventListener('mousedown',   _micDown);
+micFloatEl.addEventListener('mouseup',     _micUp);
+micFloatEl.addEventListener('mouseleave',  ()=>{if(micOn)stopMicNow();});
 
 // ── Inline mic (hidden, kept for compat) ──────────────────────
 const micBtnEl=document.getElementById('mic-btn');
