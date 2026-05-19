@@ -14,7 +14,7 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
 #overlay{position:absolute;inset:0;z-index:10;}
 #rosco-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
 /* Floating mic button — bottom right, thumb-friendly */
-#mic-float{position:fixed;right:0;bottom:0;z-index:40;border-radius:50%;border:3px solid rgba(255,255,255,.7);background:radial-gradient(circle at 36% 28%,#7ab4ff,#1a4aaa);color:#fff;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(30,80,220,.6),inset 0 2px 0 rgba(255,255,255,.3);touch-action:none;user-select:none;-webkit-user-select:none;transition:background .2s,box-shadow .2s;}
+#mic-float{position:fixed;right:0;bottom:0;z-index:40;border-radius:50%;border:3px solid rgba(255,255,255,.7);background:radial-gradient(circle at 36% 28%,#7ab4ff,#1a4aaa);color:#fff;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(30,80,220,.6),inset 0 2px 0 rgba(255,255,255,.3);touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;transition:background .2s,box-shadow .2s;}
 #mic-float.active-game{display:flex;}
 #mic-float.listening{border-color:#ff4444;background:radial-gradient(circle at 36% 28%,#ff8888,#aa0000);box-shadow:0 4px 24px rgba(255,30,30,.7);animation:micpulse .5s infinite alternate;}
 @keyframes micpulse{to{box-shadow:0 0 22px rgba(255,50,50,.9);}}
@@ -52,7 +52,7 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
 #ans-inp.fail{border-color:#ff5555;background:rgba(55,0,0,.88);}
 /* Old inline mic kept hidden — replaced by #mic-float */
 #mic-btn{display:none;}
-#action-row{width:90%;display:flex;gap:0;overflow:hidden;}
+#action-row{position:absolute;width:90%;display:flex;gap:0;overflow:hidden;z-index:21;}
 #btn-ok{flex:1;background:linear-gradient(160deg,#1a66ee,#44aaff);color:#fff;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:900;display:flex;align-items:center;justify-content:center;transition:filter .15s;border-right:2px solid rgba(0,0,0,.25);}
 #btn-ok:hover{filter:brightness(1.12);}
 #btn-ok:active{filter:brightness(.85);}
@@ -144,10 +144,11 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
         <input id="ans-inp" type="text" placeholder="Tu respuesta..." autocomplete="off" autocorrect="off" spellcheck="false"/>
         <button id="mic-btn">&#127908;</button>
       </div>
-      <div id="action-row">
-        <button id="btn-ok" onclick="submitAns()">OK</button>
-        <button id="btn-pasa" onclick="pasapalabra()">PASAPALABRA</button>
-      </div>
+    </div>
+    <!-- action-row is OUTSIDE q-panel so it's always visible in mobile -->
+    <div id="action-row" style="display:none">
+      <button id="btn-ok" onclick="submitAns()">OK</button>
+      <button id="btn-pasa" onclick="pasapalabra()">PASAPALABRA</button>
     </div>
     <div id="player-name-tag"></div>
     <!-- Floating mic button — bottom right, thumb zone -->
@@ -1855,7 +1856,7 @@ function layout(){
     mf.style.width=mf.style.height=micSz+'px';
     mf.style.fontSize=micSz*0.44+'px';
     mf.style.right=micInset+'px';
-    mf.style.bottom=(micInset+20)+'px'; // extra bottom so stays above browser nav bar
+    mf.style.bottom='calc('+micInset+'px + env(safe-area-inset-bottom, 0px) + 12px)';
 
     // Top bar
     const ibSize=Math.min(H*0.055, W*0.115, 46);
@@ -1867,23 +1868,29 @@ function layout(){
     });
     if(iOS) document.getElementById('fs-btn').style.display='none';
 
-    // Q panel
+    // Q panel — auto height so content never gets clipped
     const qd=innerR*1.84;
     const qp=document.getElementById('q-panel');
-    Object.assign(qp.style,{width:qd+'px',height:qd+'px',left:(cx-qd/2)+'px',top:(cy-qd/2)+'px',
-      gap:Math.max(3,innerR*0.04)+'px',padding:`${innerR*0.07}px ${innerR*0.10}px`});
-    document.getElementById('q-tipo').style.fontSize=Math.min(innerR*0.16,13)+'px';
-    document.getElementById('q-big-letter').style.fontSize=Math.min(innerR*0.42,36)+'px';
-    document.getElementById('q-text').style.fontSize=Math.min(innerR*0.18,15)+'px';
-    document.getElementById('q-feedback').style.fontSize=Math.min(innerR*0.13,12)+'px';
-    document.getElementById('q-divider').style.margin='2px 0';
-    document.getElementById('ans-inp').style.fontSize=Math.min(innerR*0.145,14)+'px';
-    document.getElementById('ans-inp').style.padding=`${innerR*0.075}px ${innerR*0.12}px`;
-    const btnH=Math.min(innerR*0.32,34);
-    document.getElementById('action-row').style.marginTop='3px';
-    document.getElementById('action-row').style.borderRadius=btnH*0.5+'px';
-    document.getElementById('btn-ok').style.cssText+=`;font-size:${Math.min(innerR*0.14,13)}px;height:${btnH}px;`;
-    document.getElementById('btn-pasa').style.cssText+=`;font-size:${Math.min(innerR*0.14,13)}px;height:${btnH}px;`;
+    // Position panel from top of circle, auto height, no vertical clip
+    const qpTop=cy-innerR*0.95;
+    Object.assign(qp.style,{width:qd+'px',height:'auto',left:(cx-qd/2)+'px',top:qpTop+'px',
+      gap:Math.max(2,innerR*0.028)+'px',padding:`${innerR*0.05}px ${innerR*0.10}px ${innerR*0.02}px`});
+    document.getElementById('q-tipo').style.fontSize=Math.min(innerR*0.145,12)+'px';
+    document.getElementById('q-big-letter').style.fontSize=Math.min(innerR*0.40,34)+'px';
+    document.getElementById('q-text').style.fontSize=Math.min(innerR*0.165,14)+'px';
+    document.getElementById('q-feedback').style.fontSize=Math.min(innerR*0.12,11)+'px';
+    document.getElementById('q-divider').style.margin='1px 0';
+    document.getElementById('ans-inp').style.fontSize=Math.min(innerR*0.14,13)+'px';
+    document.getElementById('ans-inp').style.padding=`${innerR*0.07}px ${innerR*0.11}px`;
+
+    // Action row: absolutely positioned below input, anchored to rosco center
+    const btnH=Math.min(W*0.090, 40);
+    const arW=qd*0.90;
+    const arTop=cy+innerR*0.52;
+    const ar=document.getElementById('action-row');
+    ar.style.cssText=`position:absolute;width:${arW}px;left:${cx-arW/2}px;top:${arTop}px;display:flex;gap:0;overflow:hidden;z-index:21;border-radius:${btnH*0.5}px;height:${btnH}px;`;
+    document.getElementById('btn-ok').style.cssText=`flex:1;background:linear-gradient(160deg,#1a66ee,#44aaff);color:#fff;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:${Math.min(W*0.038,15)}px;height:${btnH}px;border-right:2px solid rgba(0,0,0,.25);`;
+    document.getElementById('btn-pasa').style.cssText=`flex:2;background:linear-gradient(160deg,#886600,#ddaa00);color:#fff;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:${Math.min(W*0.038,15)}px;height:${btnH}px;`;
 
     // Player name tag
     const pnt=document.getElementById('player-name-tag');
@@ -1977,7 +1984,8 @@ function layout(){
 
     const qd=innerR*1.84;
     const qp=document.getElementById('q-panel');
-    Object.assign(qp.style,{width:qd+'px',height:qd+'px',left:(cx-qd/2)+'px',top:(cy-qd/2)+'px',gap:sc*2.5+'px',padding:`${innerR*0.07}px ${innerR*0.11}px`});
+    const qpTopD=cy-innerR*0.95;
+    Object.assign(qp.style,{width:qd+'px',height:'auto',left:(cx-qd/2)+'px',top:qpTopD+'px',gap:sc*2.5+'px',padding:`${innerR*0.07}px ${innerR*0.11}px ${sc*4}px`});
     document.getElementById('q-tipo').style.fontSize=Math.min(innerR*0.155,sc*13)+'px';
     document.getElementById('q-big-letter').style.fontSize=Math.min(innerR*0.44,sc*48)+'px';
     document.getElementById('q-text').style.fontSize=Math.min(innerR*0.175,sc*16.5)+'px';
@@ -1986,10 +1994,12 @@ function layout(){
     document.getElementById('ans-inp').style.fontSize=sc*14+'px';
     document.getElementById('ans-inp').style.padding=`${sc*7}px ${sc*11}px`;
     const btnH=Math.min(innerR*0.26,sc*30);
-    document.getElementById('action-row').style.marginTop=sc*3+'px';
-    document.getElementById('action-row').style.borderRadius=btnH*0.5+'px';
-    document.getElementById('btn-ok').style.cssText+=`;font-size:${sc*13.5}px;height:${btnH}px;`;
-    document.getElementById('btn-pasa').style.cssText+=`;font-size:${sc*13.5}px;height:${btnH}px;`;
+    const arDW=Math.min(innerR*1.65,qd*0.88);
+    const arDTop=cy+innerR*0.50;
+    const arD=document.getElementById('action-row');
+    arD.style.cssText=`position:absolute;width:${arDW}px;left:${cx-arDW/2}px;top:${arDTop}px;display:flex;gap:0;overflow:hidden;z-index:21;border-radius:${btnH*0.5}px;height:${btnH}px;`;
+    document.getElementById('btn-ok').style.cssText=`flex:1;background:linear-gradient(160deg,#1a66ee,#44aaff);color:#fff;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:${sc*13.5}px;height:${btnH}px;border-right:2px solid rgba(0,0,0,.25);`;
+    document.getElementById('btn-pasa').style.cssText=`flex:2;background:linear-gradient(160deg,#886600,#ddaa00);color:#fff;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:${sc*13.5}px;height:${btnH}px;`;
 
     const pnt=document.getElementById('player-name-tag');
     const pntVis=pnt.style.display==='block';
@@ -2234,7 +2244,7 @@ function hardReset(){
   if(S.timer)clearInterval(S.timer);
   stopBlink();stopMicNow();S.active=false;paused=false;timerLocked=false;
   leaderboard=[];usedRoscoIdx=[];
-  ['q-panel','lb-panel','player-name-tag','pause-overlay','end-screen'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
+  ['q-panel','action-row','lb-panel','player-name-tag','pause-overlay','end-screen'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
   document.getElementById('mic-float').className=''; // hide
   document.getElementById('timer-start-btn').disabled=false;
   const ss=document.getElementById('start-screen');ss.style.display='flex';ss.style.flexDirection='column';
@@ -2316,7 +2326,7 @@ function startGame(){
   document.getElementById('sc-timer').textContent=TOTAL_TIME;
   document.getElementById('timer-bubble').className='';
   document.getElementById('end-screen').style.display='none';
-  document.getElementById('q-panel').style.display='flex';document.getElementById('q-panel').className='active';
+  document.getElementById('q-panel').style.display='flex';document.getElementById('q-panel').className='active';document.getElementById('action-row').style.display='flex';
   document.getElementById('mic-float').className='active-game';
   const pnt=document.getElementById('player-name-tag');pnt.textContent=S.name;pnt.style.display='block';
   startBlink();drawRosco();loadQ();startTimer();
@@ -2357,7 +2367,7 @@ function advance(){
 }
 function endGame(){
   if(S.timer)clearInterval(S.timer);stopBlink();stopMicNow();S.active=false;
-  document.getElementById('q-panel').style.display='none';document.getElementById('player-name-tag').style.display='none';document.getElementById('pause-overlay').style.display='none';
+  document.getElementById('q-panel').style.display='none';document.getElementById('action-row').style.display='none';document.getElementById('player-name-tag').style.display='none';document.getElementById('pause-overlay').style.display='none';
   document.getElementById('mic-float').className=''; // hide
   saveScore();renderInGameLB();
   const ep=document.getElementById('end-screen');ep.style.display='flex';ep.style.flexDirection='column';ep.style.alignItems='center';
@@ -2369,7 +2379,7 @@ function endGame(){
 }
 function newPlayer(){
   if(S.timer)clearInterval(S.timer);stopBlink();stopMicNow();S.active=false;paused=false;
-  document.getElementById('q-panel').style.display='none';
+  document.getElementById('q-panel').style.display='none';document.getElementById('action-row').style.display='none';
   document.getElementById('player-name-tag').style.display='none';
   document.getElementById('end-screen').style.display='none';
   document.getElementById('mic-float').className=''; // hide mic
