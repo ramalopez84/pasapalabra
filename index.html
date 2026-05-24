@@ -14,25 +14,26 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
 #overlay{position:absolute;inset:0;z-index:10;}
 #rosco-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
 /* Floating mic button — bottom right, thumb-friendly */
-/* ── Mobile floating buttons ── */
+/* ── Floating MIC button (desktop + mobile) ── */
+#mic-float{position:fixed;z-index:40;border-radius:50%;border:3px solid rgba(255,255,255,.7);background:radial-gradient(circle at 36% 28%,#7ab4ff,#1a4aaa);color:#fff;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(30,80,220,.6),inset 0 2px 0 rgba(255,255,255,.3);touch-action:none;user-select:none;-webkit-user-select:none;transition:background .2s,box-shadow .2s,transform .12s;}
+#mic-float:active{transform:scale(.87);}
+#mic-float.active-game{display:flex;}
+#mic-float.listening{border-color:#ff4444;background:radial-gradient(circle at 36% 28%,#ff8888,#aa0000);box-shadow:0 4px 24px rgba(255,30,30,.7);animation:micpulse .5s infinite alternate;}
+@keyframes micpulse{to{box-shadow:0 0 22px rgba(255,50,50,.9);}}
+/* ── Mobile-only floating action buttons (OK + PASAPALABRA) ── */
 :root{--mob-btn:62px;}
-/* Shared style for all 3 floating action buttons */
 .mob-fab{position:fixed;bottom:0;z-index:40;width:var(--mob-btn);height:var(--mob-btn);border-radius:50%;border:3px solid rgba(255,255,255,.7);color:#fff;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:22px;font-weight:900;font-family:'Nunito',sans-serif;touch-action:none;user-select:none;-webkit-user-select:none;transition:background .2s,box-shadow .2s,transform .12s;}
 .mob-fab:active{transform:scale(.87);}
 .mob-fab.active-game{display:flex;}
-/* MIC — right */
-#mic-float{right:0;background:radial-gradient(circle at 36% 28%,#7ab4ff,#1a4aaa);box-shadow:0 4px 20px rgba(30,80,220,.6),inset 0 2px 0 rgba(255,255,255,.3);}
-#mic-float.listening{border-color:#ff4444;background:radial-gradient(circle at 36% 28%,#ff8888,#aa0000);box-shadow:0 4px 24px rgba(255,30,30,.7);animation:micpulse .5s infinite alternate;}
-@keyframes micpulse{to{box-shadow:0 0 22px rgba(255,50,50,.9);}}
 /* OK — left */
 #btn-ok-float{left:0;background:radial-gradient(circle at 36% 28%,#44ee88,#117744);box-shadow:0 4px 20px rgba(20,160,80,.6),inset 0 2px 0 rgba(255,255,255,.3);}
-/* PASAPALABRA — center */
+/* PASAPALABRA — center bottom */
 #btn-pasa-float{left:50%;transform:translateX(-50%);border-radius:32px;width:auto;min-width:140px;padding:0 20px;font-size:13px;background:radial-gradient(circle at 36% 28%,#ffcc44,#aa7700);box-shadow:0 4px 20px rgba(200,140,0,.6),inset 0 2px 0 rgba(255,255,255,.3);}
 #btn-pasa-float:active{transform:translateX(-50%) scale(.87);}
-/* Hide original action-row on mobile */
-@media(max-width:600px){#action-row{display:none;}}
-/* Desktop: keep action-row, hide floats */
+/* Desktop: hide mobile-only fabs, keep action-row */
 @media(min-width:601px){.mob-fab{display:none!important;}}
+/* Mobile: hide action-row, show fabs */
+@media(max-width:600px){#action-row{display:none;}}
 #mic-float.active-game{display:flex;}
 #mic-float.listening{border-color:#ff4444;background:radial-gradient(circle at 36% 28%,#ff8888,#aa0000);box-shadow:0 4px 24px rgba(255,30,30,.7);animation:micpulse .5s infinite alternate;}
 @keyframes micpulse{to{box-shadow:0 0 22px rgba(255,50,50,.9);}}
@@ -83,6 +84,9 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
 #lb-list{display:flex;flex-direction:column;gap:2px;}
 #pause-overlay{position:absolute;inset:0;z-index:50;background:rgba(0,0,20,.92);display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;pointer-events:all;}
 #pause-msg{font-weight:900;color:#fff;letter-spacing:1px;text-align:center;line-height:1.5;white-space:pre-line;}
+#btn-ver-def{display:none;background:rgba(255,255,255,.12);color:#aaddff;border:1.5px solid rgba(100,180,255,.4);border-radius:20px;padding:7px 18px;font-size:13px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;transition:background .15s;}
+#btn-ver-def:hover{background:rgba(255,255,255,.2);}
+#def-panel{display:none;background:rgba(10,30,70,.85);border:1.5px solid rgba(100,180,255,.3);border-radius:12px;padding:12px 18px;max-width:340px;color:#cce4ff;font-size:14px;font-weight:600;line-height:1.6;text-align:center;font-style:italic;}
 #btn-resume{background:linear-gradient(135deg,#1a66ee,#44aaff);color:#fff;border:none;border-radius:40px;font-family:'Nunito',sans-serif;font-weight:900;letter-spacing:1px;cursor:pointer;box-shadow:0 6px 28px rgba(68,170,255,.45);}
 #timer-config{position:absolute;z-index:55;background:rgba(0,5,40,.97);border:2px solid rgba(100,160,255,.5);border-radius:18px;display:none;flex-direction:column;align-items:center;pointer-events:all;}
 #timer-config h3{color:#fff;font-weight:900;letter-spacing:1px;}
@@ -168,14 +172,18 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
       </div>
     </div>
     <div id="player-name-tag"></div>
-    <!-- Fullscreen button for mobile -->
-    <button id="btn-fullscreen" onclick="toggleFullscreen()" style="display:none;position:fixed;top:8px;right:8px;z-index:50;width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,.5);background:rgba(0,0,40,.7);color:#fff;font-size:16px;cursor:pointer;align-items:center;justify-content:center;">⛶</button>
+    <!-- fullscreen handled by fs-btn in top-right -->
     <!-- Floating mic button — bottom right, thumb zone -->
-    <div id="mic-float" class="mob-fab" title="Mantené Ctrl (desktop) o mantener presionado (mobile) para hablar">&#127908;</div>
+    <div id="mic-float" title="Mantené Ctrl (desktop) o mantener presionado (mobile) para hablar">&#127908;</div>
     <button id="btn-ok-float" class="mob-fab" onclick="submitAns()" title="Confirmar respuesta">OK</button>
     <button id="btn-pasa-float" class="mob-fab" onclick="pasapalabra()" title="Pasar palabra">PASAPALABRA</button>
     <div id="lb-panel"><div id="lb-title-el">TABLA</div><div id="lb-list"></div></div>
-    <div id="pause-overlay"><div id="pause-msg"></div><button id="btn-resume" onclick="resumeGame()">&#9654; REANUDAR</button></div>
+    <div id="pause-overlay">
+  <div id="pause-msg"></div>
+  <button id="btn-ver-def" onclick="toggleDef()">📖 VER DEFINICIÓN</button>
+  <div id="def-panel"></div>
+  <button id="btn-resume" onclick="resumeGame()">&#9654; CONTINUAR</button>
+</div>
     <div id="timer-config">
       <h3 id="tc-title">TIEMPO DE JUEGO</h3>
       <p id="tc-desc">Solo el primer jugador puede configurarlo.</p>
@@ -653,7 +661,35 @@ function lockTimer(){
 }
 
 function togglePause(){if(!S.active)return;if(paused)resumeGame();else showPause('\u23F8  JUEGO PAUSADO',null);}
-function showPause(msg,cb){paused=true;stopBlink();stopMicNow();afterResume=cb;document.getElementById('pause-msg').textContent=msg||'PAUSADO';document.getElementById('pause-overlay').style.display='flex';}
+function showPause(msg,cb,def){
+  paused=true;stopBlink();stopMicNow();afterResume=cb;
+  document.getElementById('pause-msg').textContent=msg||'PAUSADO';
+  // Definición: mostrar botón solo si hay def
+  const btnDef=document.getElementById('btn-ver-def');
+  const defPanel=document.getElementById('def-panel');
+  if(def){
+    btnDef.style.display='inline-block';
+    defPanel.style.display='none';
+    defPanel.textContent=def;
+    btnDef.textContent='📖 VER DEFINICIÓN';
+  }else{
+    btnDef.style.display='none';
+    defPanel.style.display='none';
+    defPanel.textContent='';
+  }
+  document.getElementById('pause-overlay').style.display='flex';
+}
+function toggleDef(){
+  const panel=document.getElementById('def-panel');
+  const btn=document.getElementById('btn-ver-def');
+  if(panel.style.display==='none'||!panel.style.display){
+    panel.style.display='block';
+    btn.textContent='🔼 OCULTAR';
+  }else{
+    panel.style.display='none';
+    btn.textContent='📖 VER DEFINICIÓN';
+  }
+}
 function resumeGame(){paused=false;document.getElementById('pause-overlay').style.display='none';startBlink();if(afterResume){const fn=afterResume;afterResume=null;setTimeout(fn,80);}else loadQ();}
 function startTimer(){
   if(S.timer)clearInterval(S.timer);
@@ -880,7 +916,7 @@ function submitAns(){
     setTimeout(()=>{if(S.active)advance();},900);
   }else{
     S.letters[l]='wrong';S.wrong++;removeLetter(l);drawRosco();
-    showPause('\u274C  ERA: '+q.r,()=>advance());
+    showPause('\u274C  ERA: '+q.r,()=>advance(),q.p);
   }
 }
 function pasapalabra(){if(!S.active)return;const l=getCur();if(S.letters[l]==='pending')S.letters[l]='passed';S.curIdx=(S.curIdx+1)%Math.max(S.pending.length,1);drawRosco();showPause('\u21A9  PASAPALABRA',()=>loadQ());}
@@ -945,23 +981,7 @@ setTimeout(()=>{
   if(ni) ni.focus();
 },100);
 
-function toggleFullscreen(){
-  if(!document.fullscreenElement&&!document.webkitFullscreenElement){
-    const el=document.documentElement;
-    if(el.requestFullscreen)el.requestFullscreen();
-    else if(el.webkitRequestFullscreen)el.webkitRequestFullscreen();
-    document.getElementById('btn-fullscreen').textContent='✕';
-  }else{
-    if(document.exitFullscreen)document.exitFullscreen();
-    else if(document.webkitExitFullscreen)document.webkitExitFullscreen();
-    document.getElementById('btn-fullscreen').textContent='⛶';
-  }
-}
-// Show fullscreen btn on touch devices
-if('ontouchstart' in window){
-  const fb=document.getElementById('btn-fullscreen');
-  if(fb)fb.style.display='flex';
-}
+// fullscreen handled by existing toggleFS()
 </script>
 </body>
 </html>
