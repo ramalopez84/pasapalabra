@@ -909,7 +909,8 @@ function submitAns(){
     setTimeout(()=>{if(S.active)advance();},900);
   }else{
     S.letters[l]='wrong';S.wrong++;removeLetter(l);drawRosco();
-    showPause('\u274C  ERA: '+q.r,()=>advance(),q.p);
+    const tipo=q.t==='e'?'EMPIEZA CON '+l:'CONTIENE '+l;
+    showPause('\u274C  ERA: '+q.r+'  ·  '+tipo,()=>advance(),q.p);
   }
 }
 function pasapalabra(){if(!S.active)return;const l=getCur();if(S.letters[l]==='pending')S.letters[l]='passed';S.curIdx=(S.curIdx+1)%Math.max(S.pending.length,1);drawRosco();showPause('\u21A9  PASAPALABRA',()=>loadQ());}
