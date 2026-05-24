@@ -84,7 +84,7 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
 #lb-list{display:flex;flex-direction:column;gap:2px;}
 #pause-overlay{position:absolute;inset:0;z-index:50;background:rgba(0,0,20,.92);display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;pointer-events:all;}
 #pause-msg{font-weight:900;color:#fff;letter-spacing:1px;text-align:center;line-height:1.5;white-space:pre-line;}
-#pause-tipo{font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#88ccff;background:rgba(100,180,255,.1);border:1px solid rgba(100,180,255,.25);border-radius:20px;padding:5px 16px;text-align:center;}
+#pause-tipo{display:none;font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#88ccff;background:rgba(100,180,255,.1);border:1px solid rgba(100,180,255,.25);border-radius:20px;padding:5px 16px;text-align:center;}
 #btn-ver-def{display:none;background:rgba(255,255,255,.12);color:#aaddff;border:1.5px solid rgba(100,180,255,.4);border-radius:20px;padding:7px 18px;font-size:13px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;transition:background .15s;}
 #btn-ver-def:hover{background:rgba(255,255,255,.2);}
 #def-panel{display:none;flex-direction:column;align-items:center;gap:10px;background:rgba(10,30,70,.85);border:1.5px solid rgba(100,180,255,.3);border-radius:12px;padding:14px 18px;max-width:340px;}
@@ -183,7 +183,8 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
     <div id="pause-overlay">
   <div id="pause-msg"></div>
   <button id="btn-ver-def" onclick="toggleDef()">📖 VER DEFINICIÓN</button>
-  <div id="def-panel"><div id="pause-tipo"></div><div id="def-text"></div></div>
+  <div id="pause-tipo"></div>
+  <div id="def-panel"><div id="def-text"></div></div>
   <button id="btn-resume" onclick="resumeGame()">&#9654; CONTINUAR</button>
 </div>
     <div id="timer-config">
@@ -674,8 +675,9 @@ function showPause(msg,cb,def,tipo){
   btnDef.textContent='📖 VER DEFINICIÓN';
   btnDef.style.display='none';
   tipoEl.style.display='none';
-  // Tipo (EMPIEZA CON / CONTIENE) — aparece dentro del panel al expandir
-  if(tipo){tipoEl.textContent=tipo;}  // display heredado del def-panel padre
+  // Tipo: guardar texto, oculto hasta que se abra el panel
+  if(tipo){tipoEl.textContent=tipo;}
+  tipoEl.style.display='none';
   // Definición
   if(def){
     btnDef.style.display='inline-block';
@@ -686,11 +688,14 @@ function showPause(msg,cb,def,tipo){
 function toggleDef(){
   const panel=document.getElementById('def-panel');
   const btn=document.getElementById('btn-ver-def');
+  const tipo=document.getElementById('pause-tipo');
   if(panel.style.display==='none'||!panel.style.display){
     panel.style.display='flex';
+    if(tipo.textContent) tipo.style.display='inline-block';
     btn.style.display='none';
   }else{
     panel.style.display='none';
+    tipo.style.display='none';
     btn.style.display='inline-block';
   }
 }
