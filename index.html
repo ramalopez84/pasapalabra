@@ -665,23 +665,21 @@ function togglePause(){if(!S.active)return;if(paused)resumeGame();else showPause
 function showPause(msg,cb,def,tipo){
   paused=true;stopBlink();stopMicNow();afterResume=cb;
   document.getElementById('pause-msg').textContent=msg||'PAUSADO';
-  // Tipo (EMPIEZA CON / CONTIENE) — encima de la definición
-  const tipoEl=document.getElementById('pause-tipo');
-  if(tipo){tipoEl.textContent=tipo;tipoEl.style.display='inline-block';}
-  else{tipoEl.style.display='none';}
-  // reset def panel on each call
-  defPanel.style.display='none';
-  btnDef.textContent='📖 VER DEFINICIÓN';
-  // Definición
+  // Declarar primero
   const btnDef=document.getElementById('btn-ver-def');
   const defPanel=document.getElementById('def-panel');
+  const tipoEl=document.getElementById('pause-tipo');
+  // Reset
+  defPanel.style.display='none';
+  btnDef.textContent='📖 VER DEFINICIÓN';
+  btnDef.style.display='none';
+  tipoEl.style.display='none';
+  // Tipo (EMPIEZA CON / CONTIENE) — aparece dentro del panel
+  if(tipo){tipoEl.textContent=tipo;}
+  // Definición
   if(def){
     btnDef.style.display='inline-block';
     document.getElementById('def-text').textContent=def;
-    defPanel.style.display='none';
-  }else{
-    btnDef.style.display='none';
-    defPanel.style.display='none';
   }
   document.getElementById('pause-overlay').style.display='flex';
 }
