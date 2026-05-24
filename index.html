@@ -174,7 +174,7 @@ html,body{width:100%;height:100%;height:100dvh;background:#111;overflow:hidden;f
     <div id="player-name-tag"></div>
     <!-- fullscreen handled by fs-btn in top-right -->
     <!-- Floating mic button — bottom right, thumb zone -->
-    <div id="mic-float" title="Mantené Ctrl (desktop) o mantener presionado (mobile) para hablar">&#127908;</div>
+    <div id="mic-float" title="Toca para activar/desactivar el micrófono">🎤</div>
     <button id="btn-ok-float" class="mob-fab" onclick="submitAns()" title="Confirmar respuesta">OK</button>
     <button id="btn-pasa-float" class="mob-fab" onclick="pasapalabra()" title="Pasar palabra">PASAPALABRA</button>
     <div id="lb-panel"><div id="lb-title-el">TABLA</div><div id="lb-list"></div></div>
@@ -350,8 +350,9 @@ function layout(){
     const bubGap  = W*0.05;
     const micSz   = Math.min(W*0.155, 70);    // floating mic
     const micInset= Math.max(W*0.04, 12);
-    // Bottom zone: bubbles + a little margin
-    const botZone = bubDiam + H*0.015;
+    // Bottom zone: bubbles + fabs (OK/PASA/MIC) + margin
+    const fabH = Math.min(W*0.155, 70) + 8; // mic/ok/pasa height + gap
+    const botZone = bubDiam + fabH + H*0.02;
     // Rosco zone: everything between topBar and bottom zone
     const roscoZoneTop = topBarH;
     const roscoZoneH   = H - topBarH - botZone;
@@ -394,7 +395,7 @@ function layout(){
       b.style.width=b.style.height=ibSize+'px';
       b.style.fontSize=ibSize*0.42+'px';
     });
-    if(iOS) document.getElementById('fs-btn').style.display='none';
+    // fs-btn visible en todos los dispositivos incluyendo iOS
 
     // Q panel
     const qd=innerR*1.84;
@@ -501,7 +502,7 @@ function layout(){
     document.getElementById('top-bar').style.padding=`${inset}px ${inset}px 0 ${inset}px`;
     ['top-left','top-right'].forEach(id=>document.getElementById(id).style.gap=sc*9+'px');
     document.querySelectorAll('.icon-btn').forEach(b=>{b.style.width=b.style.height=ibSize+'px';b.style.fontSize=ibSize*0.42+'px';});
-    if(iOS) document.getElementById('fs-btn').style.display='none';
+    // fs-btn visible en todos los dispositivos incluyendo iOS
     else document.getElementById('fs-btn').style.display='flex';
 
     const qd=innerR*1.84;
@@ -718,6 +719,7 @@ function initRec(){
 function setMicUI(on){
   const mf=document.getElementById('mic-float');
   const mb=document.getElementById('mic-btn');
+  mf.textContent=on?'⏹':'🎤';
   if(on){
     mf.className=S.active?'active-game listening':'listening';
     document.getElementById('btn-ok-float').className=S.active?'mob-fab active-game':'mob-fab';
@@ -755,18 +757,17 @@ function stopMicNow(){
 
 // ── Floating mic: push-to-hold (mobile + desktop) ─────────────
 const micFloatEl=document.getElementById('mic-float');
-// Use pointer events (covers both mouse and touch uniformly) + fallback
-function _micDown(e){e.preventDefault();e.stopPropagation();startMicNow();}
-function _micUp(e){e.preventDefault();e.stopPropagation();stopMicNow();}
-micFloatEl.addEventListener('pointerdown', _micDown, {passive:false});
-micFloatEl.addEventListener('pointerup',   _micUp,   {passive:false});
-micFloatEl.addEventListener('pointercancel',()=>{if(micOn)stopMicNow();});
-micFloatEl.addEventListener('touchstart',  _micDown, {passive:false});
-micFloatEl.addEventListener('touchend',    _micUp,   {passive:false});
-micFloatEl.addEventListener('touchcancel', ()=>{if(micOn)stopMicNow();});
-micFloatEl.addEventListener('mousedown',   _micDown);
-micFloatEl.addEventListener('mouseup',     _micUp);
-micFloatEl.addEventListener('mouseleave',  ()=>{if(micOn)stopMicNow();});
+// Toggle ON/OFF — funciona en iOS, Android y desktop
+function _micToggle(e){
+  e.preventDefault();e.stopPropagation();
+  if(!micOn){
+    startMicNow();
+  } else {
+    stopMicNow();
+  }
+}
+micFloatEl.addEventListener('click', _micToggle);
+micFloatEl.addEventListener('touchend', _micToggle, {passive:false});
 
 // ── Inline mic (hidden, kept for compat) ──────────────────────
 const micBtnEl=document.getElementById('mic-btn');
