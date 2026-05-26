@@ -823,14 +823,42 @@ function stopMicNow(){
   micOn=false;setMicUI(false);
 }
 
-// ── Floating mic: push-to-hold (mobile + desktop) ─────────────
+// ── Floating mic ─────────────────────────────────────────────
 const micFloatEl=document.getElementById('mic-float');
-// Toggle ON/OFF — un tap activa, otro tap apaga (funciona en iOS, Android y desktop)
+
+// iOS standalone necesita que recognition.start() se llame SINCRÓNICAMENTE
+// dentro del handler de touch, sin ningún await previo.
+function _micTouchStart(e){
+  e.preventDefault();e.stopPropagation();
+  if(!S.active||paused)return;
+  if(micOn){stopMicNow();return;}
+  // Crear/recrear instancia y arrancar sincrónicamente
+  if(!recognition)recognition=initRec();
+  if(recognition){
+    try{
+      recognition.start();
+      micOn=true;setMicUI(true);
+      // Pedir permiso de getUserMedia en paralelo (para la próxima vez)
+      if(!micPermitted&&navigator.mediaDevices){
+        navigator.mediaDevices.getUserMedia({audio:true}).then(s=>{s.getTracks().forEach(t=>t.stop());micPermitted=true;}).catch(()=>{});
+      }
+    }catch(err){
+      // Instancia inválida — recrear y reintentar sincrónicamente
+      recognition=initRec();
+      if(recognition){try{recognition.start();micOn=true;setMicUI(true);}catch(e2){}}
+    }
+  }
+}
 function _micToggle(e){
   e.preventDefault();e.stopPropagation();
   if(micOn){stopMicNow();}else{startMicNow();}
 }
-micFloatEl.addEventListener('click', _micToggle);
+// En iOS usamos touchstart sincrónico; en desktop usamos click normal
+micFloatEl.addEventListener('touchstart', _micTouchStart, {passive:false});
+micFloatEl.addEventListener('click', (e)=>{
+  // click llega después de touchstart en mobile — ignorarlo si ya está activo
+  e.preventDefault();
+});
 
 // ── Inline mic (hidden, kept for compat) ──────────────────────
 const micBtnEl=document.getElementById('mic-btn');
