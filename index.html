@@ -374,13 +374,13 @@ function layout(){
     // Player name: outside rosco, between rosco bottom and bubbles
     const pnt=document.getElementById('player-name-tag');
     const pntVis=S.active||pnt.style.display==='block';
-    const nameOutsideY = cy + r + cr*0.65;
+    const nameOutsideY = cy + r + cr*1.4;
     pnt.style.cssText=`position:absolute;left:50%;transform:translateX(-50%);top:${nameOutsideY}px;font-size:${Math.min(nameBandH*0.55,13)}px;padding:3px 14px;background:rgba(0,0,40,.82);border:1.5px solid rgba(100,160,255,.45);border-radius:30px;color:#ffcc44;font-weight:900;letter-spacing:2px;text-transform:uppercase;pointer-events:none;z-index:25;white-space:nowrap;display:${pntVis?'block':'none'};`;
 
     // Bubbles: same row as name, left and right
     const bubY = nameOutsideY + nameBandH*0.1;
-    setRound('score-bubble', bubDiam, W*0.04, bubY);
-    setRound('timer-bubble', bubDiam, W - W*0.04 - bubDiam,    bubY);
+    setRound('score-bubble', bubDiam, W*0.10, bubY);
+    setRound('timer-bubble', bubDiam, W - W*0.10 - bubDiam,    bubY);
     const bfsM = bubDiam*0.35;
     document.getElementById('sc-num').style.fontSize=bfsM+'px';
     document.getElementById('sc-timer').style.fontSize=bfsM+'px';
