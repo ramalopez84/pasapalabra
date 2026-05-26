@@ -747,8 +747,6 @@ function startTimer(){
 const isIOSStandalone = ('standalone' in navigator) && navigator.standalone;
 
 function initRec(){
-  // En iOS standalone SpeechRecognition falla tras pedir permiso — usamos dictado nativo
-  if(isIOSStandalone) return null;
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return null;
   const rec=new SR();rec.lang='es-AR';rec.continuous=false;rec.interimResults=false;rec.maxAlternatives=1;
   rec.onresult=e=>{
@@ -781,29 +779,43 @@ function setMicUI(on){
 async function ensureMicPermission(){
   if(micPermitted)return true;
   if(window.location.protocol==='file:'){alert('El mic requiere HTTPS.\nUsá VS Code Live Server o: python3 -m http.server 8080');return false;}
-  try{const s=await navigator.mediaDevices.getUserMedia({audio:true,video:false});s.getTracks().forEach(t=>t.stop());micPermitted=true;return true;}
-  catch(e){alert('Sin permiso de micrófono. Habilitalo en Ajustes > Safari/Chrome > Micrófono.');return false;}
+  try{
+    // iOS standalone: warm-up AudioContext para desbloquear contexto de medios en Safari
+    if(isIOSStandalone){
+      try{
+        const ac=new(window.AudioContext||window.webkitAudioContext)();
+        const buf=ac.createBuffer(1,1,22050);
+        const src=ac.createBufferSource();
+        src.buffer=buf;src.connect(ac.destination);src.start(0);
+        await new Promise(r=>setTimeout(r,100));
+        ac.close();
+      }catch(ignored){}
+    }
+    const s=await navigator.mediaDevices.getUserMedia({audio:true,video:false});
+    s.getTracks().forEach(t=>t.stop());
+    micPermitted=true;return true;
+  }
+  catch(e){alert('Sin permiso de micrófono. Habilitalo en Ajustes > Safari > '+location.hostname+' > Micrófono.');return false;}
 }
 async function startMicNow(){
   if(!S.active||paused)return;
-  // iOS standalone: SpeechRecognition no funciona — enfocar input para usar dictado del teclado nativo
-  if(isIOSStandalone){
-    const inp=document.getElementById('ans-inp');
-    inp.focus();
-    // Pequeño tooltip informativo la primera vez
-    if(!window._standaloneHintShown){
-      window._standaloneHintShown=true;
-      inp.placeholder='Dictá con el 🎤 del teclado';
-      setTimeout(()=>{inp.placeholder='Tu respuesta...';},3500);
-    }
-    return;
-  }
   if(!await ensureMicPermission())return;
   if(!recognition)recognition=initRec();
-  if(!recognition){alert('Reconocimiento de voz no disponible.\nUsá Chrome (Android) o Safari (iOS).');return;}
+  if(!recognition){alert('Reconocimiento de voz no disponible.');return;}
   if(micOn)return;
-  try{recognition.start();}catch(e){return;}
-  micOn=true;setMicUI(true);
+  try{
+    recognition.start();
+    micOn=true;setMicUI(true);
+  }catch(e){
+    // En iOS standalone a veces la instancia queda en estado inválido — recrear y reintentar
+    if(isIOSStandalone){
+      recognition=null;
+      recognition=initRec();
+      if(recognition){
+        try{recognition.start();micOn=true;setMicUI(true);}catch(e2){}
+      }
+    }
+  }
 }
 function stopMicNow(){
   if(!micOn)return;
