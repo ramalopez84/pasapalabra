@@ -377,10 +377,10 @@ function layout(){
     const nameOutsideY = cy + r + cr*0.65;
     pnt.style.cssText=`position:absolute;left:50%;transform:translateX(-50%);top:${nameOutsideY}px;font-size:${Math.min(nameBandH*0.55,13)}px;padding:3px 14px;background:rgba(0,0,40,.82);border:1.5px solid rgba(100,160,255,.45);border-radius:30px;color:#ffcc44;font-weight:900;letter-spacing:2px;text-transform:uppercase;pointer-events:none;z-index:25;white-space:nowrap;display:${pntVis?'block':'none'};`;
 
-    // Bubbles: below name band
-    const bubY = nameOutsideY + nameBandH*0.7 + bubDiam*0.5;
-    setRound('score-bubble', bubDiam, cx - bubDiam - bubGap/2, bubY);
-    setRound('timer-bubble', bubDiam, cx + bubGap/2,           bubY);
+    // Bubbles: same row as name, left and right
+    const bubY = nameOutsideY + nameBandH*0.1;
+    setRound('score-bubble', bubDiam, W*0.04, bubY);
+    setRound('timer-bubble', bubDiam, W - W*0.04 - bubDiam,    bubY);
     const bfsM = bubDiam*0.35;
     document.getElementById('sc-num').style.fontSize=bfsM+'px';
     document.getElementById('sc-timer').style.fontSize=bfsM+'px';
@@ -388,26 +388,42 @@ function layout(){
       s.style.fontSize=(i%2===0?bfsM:bubDiam*0.13)+'px';
     });
 
-    // Bottom row: OK (left) | MIC (center) | PASAPALABRA (right, slightly lower = curve)
+    // Hide internal OK/PASAPALABRA buttons (only use floating ones on mobile)
+    document.getElementById('action-row').style.display='none';
+
+    // Bottom row: OK (left) | PASAPALABRA (center, slightly lower) | MIC (right)
     const fabBottom = micInset + 16;
     const pasaExtraDown = micSz * 0.15;
 
     // OK — left
     const btnOkF = document.getElementById('btn-ok-float');
-    btnOkF.style.cssText += `;width:${micSz}px;height:${micSz}px;font-size:${micSz*0.32}px;left:${micInset}px;right:auto;bottom:${fabBottom}px;transform:none;`;
+    btnOkF.style.width = btnOkF.style.height = micSz+'px';
+    btnOkF.style.fontSize = micSz*0.32+'px';
+    btnOkF.style.left = micInset+'px';
+    btnOkF.style.right = 'auto';
+    btnOkF.style.bottom = fabBottom+'px';
+    btnOkF.style.transform = 'none';
 
-    // MIC — center
+    // PASAPALABRA — center, slightly lower for arc feel
+    const btnPasaF = document.getElementById('btn-pasa-float');
+    btnPasaF.style.width = 'auto';
+    btnPasaF.style.height = (micSz*0.72)+'px';
+    btnPasaF.style.borderRadius = '30px';
+    btnPasaF.style.padding = '0 14px';
+    btnPasaF.style.fontSize = micSz*0.22+'px';
+    btnPasaF.style.left = '50%';
+    btnPasaF.style.right = 'auto';
+    btnPasaF.style.bottom = (fabBottom - pasaExtraDown)+'px';
+    btnPasaF.style.transform = 'translateX(-50%)';
+
+    // MIC — always right
     const mf=document.getElementById('mic-float');
     mf.style.width=mf.style.height=micSz+'px';
     mf.style.fontSize=micSz*0.44+'px';
-    mf.style.left='50%';
-    mf.style.right='auto';
-    mf.style.transform='translateX(-50%)';
+    mf.style.left='auto';
+    mf.style.right=micInset+'px';
+    mf.style.transform='none';
     mf.style.bottom=fabBottom+'px';
-
-    // PASAPALABRA — right, slightly lower for arc feel
-    const btnPasaF = document.getElementById('btn-pasa-float');
-    btnPasaF.style.cssText += `;width:auto;height:${micSz*0.72}px;min-width:auto;border-radius:30px;padding:0 14px;font-size:${micSz*0.22}px;right:${micInset}px;left:auto;bottom:${fabBottom - pasaExtraDown}px;transform:none;`
 
     // Top bar
     const ibSize=Math.min(H*0.055, W*0.115, 46);
