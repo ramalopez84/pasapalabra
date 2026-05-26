@@ -743,8 +743,13 @@ function startTimer(){
   },1000);
 }
 
+// Detect iOS standalone (web app anclada a pantalla de inicio)
+const isIOSStandalone = ('standalone' in navigator) && navigator.standalone;
+
 function initRec(){
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition||window.webkitSpeechRecognition;if(!SR)return null;
+  // En iOS standalone SpeechRecognition falla tras pedir permiso — usamos dictado nativo
+  if(isIOSStandalone) return null;
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return null;
   const rec=new SR();rec.lang='es-AR';rec.continuous=false;rec.interimResults=false;rec.maxAlternatives=1;
   rec.onresult=e=>{
     const word=e.results[0][0].transcript.trim().toUpperCase().replace(/\s+/g,'');
@@ -781,6 +786,18 @@ async function ensureMicPermission(){
 }
 async function startMicNow(){
   if(!S.active||paused)return;
+  // iOS standalone: SpeechRecognition no funciona — enfocar input para usar dictado del teclado nativo
+  if(isIOSStandalone){
+    const inp=document.getElementById('ans-inp');
+    inp.focus();
+    // Pequeño tooltip informativo la primera vez
+    if(!window._standaloneHintShown){
+      window._standaloneHintShown=true;
+      inp.placeholder='Dictá con el 🎤 del teclado';
+      setTimeout(()=>{inp.placeholder='Tu respuesta...';},3500);
+    }
+    return;
+  }
   if(!await ensureMicPermission())return;
   if(!recognition)recognition=initRec();
   if(!recognition){alert('Reconocimiento de voz no disponible.\nUsá Chrome (Android) o Safari (iOS).');return;}
